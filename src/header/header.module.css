@@ -1,0 +1,6 @@
+.wrapper {
+  width: 1280px;
+  border: 1px solid black;
+  min-height: 13vh;
+  box-sizing: border-box;
+}
