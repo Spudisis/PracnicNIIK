@@ -1,11 +1,7 @@
-import s from "./header.module.css";
+import s from "./logoname.module.css";
 
 function Header() {
-  return (
-    <header>
-      <div className={s.wrapper}></div>
-    </header>
-  );
+  return <div></div>;
 }
 
 export default Header;
