@@ -9,9 +9,18 @@
   font-size: 26px;
 }
 .logo {
-}
-.logo img {
   margin: 10px;
   max-width: 10vw;
   max-height: 10vh;
+}
+
+.logo__change {
+  margin: 10px;
+  max-width: 5vw;
+  max-height: 5vh;
+}
+.text__change {
+  max-width: 700px;
+  margin: 10px;
+  font-size: 20px;
 }

@@ -4,6 +4,13 @@
   min-height: 13vh;
   box-sizing: border-box;
 }
+.wrapper__change {
+  width: 1280px;
+  margin: 0 auto;
+  max-height: 8vh;
+  box-sizing: border-box;
+}
+
 .header__main {
   background-color: #040a19;
   z-index: 100;
