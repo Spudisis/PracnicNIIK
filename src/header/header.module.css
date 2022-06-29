@@ -1,14 +1,33 @@
 .wrapper {
   width: 1280px;
   margin: 0 auto;
-  border: 1px solid black;
   min-height: 13vh;
   box-sizing: border-box;
 }
-header {
+.header__main {
   background-color: #040a19;
+  z-index: 100;
 }
 .objects {
   display: flex;
   justify-content: space-between;
+}
+.header__fixed {
+  position: fixed;
+  left: 0;
+  top: 0;
+  min-width: 100%;
+  animation-name: show_anim;
+  animation-duration: 1s;
+}
+
+@keyframes show_anim {
+  0% {
+    opacity: 0;
+    top: -70px;
+  }
+  100% {
+    opacity: 1;
+    top: 0;
+  }
 }
