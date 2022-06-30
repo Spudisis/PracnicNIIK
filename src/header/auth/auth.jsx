@@ -1,23 +1,19 @@
 import s from "./auth.module.css";
-
+import { NavLink } from "react-router-dom";
 function Auth() {
-  document.addEventListener("click", function (e) {
-    if (e.target.id === "auth") {
-      console.log("click1");
-    }
-    if (e.target.id === "reg") {
-      console.log("click2");
-    }
-  });
   return (
     <div className={s.wrapper}>
       <div className={s.authorization}>
-        <div className={s.auth_text} id="auth">
-          Авторизация
-        </div>
-        <div className={s.reg} id="reg">
-          Регистрация
-        </div>
+        <NavLink to="/authorization" className={s.auth_text}>
+          <div id="auth" className={s.refText}>
+            Авторизация
+          </div>
+        </NavLink>
+        <NavLink to="/registration" className={s.reg}>
+          <div id="reg" className={s.refText}>
+            Регистрация
+          </div>
+        </NavLink>
       </div>
     </div>
   );

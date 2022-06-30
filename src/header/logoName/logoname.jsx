@@ -1,4 +1,6 @@
 import s from "./logoname.module.css";
+import { NavLink } from "react-router-dom";
+
 function Logoname() {
   let logo;
   let text;
@@ -36,13 +38,15 @@ function Logoname() {
   };
 
   return (
-    <div className={s.wrapper}>
-      <img id="logoMain" className={s.logo} src="./img/Logo.png" alt="logo" />
+    <NavLink to="/">
+      <div className={s.wrapper}>
+        <img id="logoMain" className={s.logo} src="./img/Logo.png" alt="logo" />
 
-      <h1 className={s.text} id="textLogo">
-        Научно-исследовательский и проектный институт карбамида
-      </h1>
-    </div>
+        <h1 className={s.text} id="textLogo">
+          Научно-исследовательский и проектный институт карбамида
+        </h1>
+      </div>
+    </NavLink>
   );
 }
 
