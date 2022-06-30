@@ -3,10 +3,14 @@ function Logoname() {
   let logo;
   let text;
   let heigth;
+  let k;
+  let wrapper;
 
   const load = function () {
     logo = document.querySelector("#logoMain");
     text = document.querySelector("#textLogo");
+    wrapper = document.querySelector("#wrapper");
+    k = wrapper.scrollHeight;
   };
 
   window.addEventListener("scroll", function () {
@@ -14,7 +18,7 @@ function Logoname() {
       load();
     }
     heigth = window.pageYOffset;
-    heigth > 150 ? add() : del();
+    heigth > k ? add() : del();
   });
 
   const add = function () {

@@ -1,7 +1,7 @@
 .wrapper {
   width: 1280px;
   margin: 0 auto;
-  min-height: 13vh;
+  min-height: 10vh;
   box-sizing: border-box;
 }
 .wrapper__change {
@@ -25,7 +25,7 @@
   top: 0;
   min-width: 100%;
   animation-name: show_anim;
-  animation-duration: 1s;
+  animation-duration: 0.1s;
 }
 
 @keyframes show_anim {

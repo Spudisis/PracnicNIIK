@@ -16,6 +16,10 @@
   text-align: center;
   border-radius: 10px 0 0 10px;
 }
+.auth_text:hover {
+  cursor: pointer;
+  background-color: #0a1738;
+}
 .reg {
   padding: 0px 10px;
   display: table-cell;

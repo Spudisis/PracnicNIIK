@@ -4,26 +4,29 @@ import Logoname from "./logoName/logoname";
 
 function Header() {
   let heigth;
+  let header;
+  let wrapper;
+  let k;
+  const load = function () {
+    header = document.querySelector("#header");
+    wrapper = document.querySelector("#wrapper");
+    k = wrapper.scrollHeight;
+  };
 
   window.addEventListener("scroll", function () {
-    heigth = window.pageYOffset;
-    if (heigth > 150) {
-      add();
-    } else {
-      del();
+    if (header == null || wrapper == null) {
+      load();
     }
+    heigth = window.pageYOffset;
+    heigth > k ? add() : del();
   });
 
   function add() {
-    const header = document.querySelector("#header");
-    const wrapper = document.querySelector("#wrapper");
     header.classList.add(s.header__fixed);
     wrapper.classList.add(s.wrapper__change);
     wrapper.classList.remove(s.wrapper);
   }
   function del() {
-    const header = document.querySelector("#header");
-    const wrapper = document.querySelector("#wrapper");
     header.classList.remove(s.header__fixed);
     wrapper.classList.remove(s.wrapper__change);
     wrapper.classList.add(s.wrapper);
