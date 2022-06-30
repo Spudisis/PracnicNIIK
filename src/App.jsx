@@ -7,11 +7,13 @@ import { BrowserRouter as Router } from "react-router-dom";
 function App() {
   return (
     <div className={s.wrapper}>
-      <Router>
-        <Header />
-        <Main />
-        <Footer />
-      </Router>
+      <div className={s.img}>
+        <Router>
+          <Header />
+          <Main />
+          <Footer />
+        </Router>
+      </div>
     </div>
   );
 }

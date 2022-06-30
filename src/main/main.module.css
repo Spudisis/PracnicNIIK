@@ -1,8 +1,14 @@
 .wrapper {
   width: 1280px;
   margin: 0 auto;
-  border: 1px solid black;
   min-height: 150vh;
   box-sizing: border-box;
+  background-color: rgb(5, 2, 20);
+  box-shadow: 60px 0 60px -4px rgba(5, 2, 20, 0.8),
+    -60px 0 60px -4px rgba(5, 2, 20, 0.8);
 }
 
+h2 {
+  margin: 0px;
+  padding: 0px;
+}
