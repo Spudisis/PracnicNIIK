@@ -3,9 +3,6 @@
   margin: 0 auto;
   min-height: 150vh;
   box-sizing: border-box;
-  background-color: rgb(5, 2, 20);
-  box-shadow: 60px 0 60px -4px rgba(5, 2, 20, 0.8),
-    -60px 0 60px -4px rgba(5, 2, 20, 0.8);
 }
 
 h2 {

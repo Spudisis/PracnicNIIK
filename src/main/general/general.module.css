@@ -2,6 +2,40 @@
   font-size: 40px;
 }
 .head {
-  width: 100%;
-  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  padding: 30px 0px;
+}
+.PostOb {
+  font-size: 30px;
+  margin-left: 30px;
+}
+p {
+  font-size: 25px;
+  text-align: justify;
+}
+.info {
+  display: flex;
+  justify-content: center;
+}
+.info__metrology {
+  display: flex;
+  justify-content: space-between;
+}
+li {
+  font-size: 25px;
+}
+.imageBar {
+  width: 35%;
+  height: 35%;
+  margin-left: 20px;
+}
+.imageMetrology {
+  width: 50%;
+  height: 50%;
+  margin-left: 20px;
+}
+.projectBar {
+  width: 100vh;
+  height: 50vh;
 }

@@ -5,14 +5,14 @@
   box-sizing: border-box;
 }
 .wrapper__change {
-  width: 1280px;
+  max-width: 1280px;
   margin: 0 auto;
   max-height: 8vh;
   box-sizing: border-box;
 }
 
 .header__main {
-  background-color: #040a19;
+  background-color: rgb(4, 10, 25);
   z-index: 100;
 }
 .objects {
@@ -23,9 +23,10 @@
   position: fixed;
   left: 0;
   top: 0;
-  min-width: 100%;
+  width: 100%;
   animation-name: show_anim;
-  animation-duration: 0.1s;
+  animation-duration: 0.5s;
+  background-color: rgba(4, 10, 25, 0.9);
 }
 
 @keyframes show_anim {
