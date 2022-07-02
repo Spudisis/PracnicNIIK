@@ -6,12 +6,13 @@ import Registration from "./registration/registration";
 function Main() {
   return (
     <main className={s.wrapper}>
-      <Routes>
-        <Route path="/authorization" element={<Authorization />} />
-        <Route path="/registration" element={<Registration />} />
-
-        <Route path="/" element={<General />} />
-      </Routes>
+      <div>
+        <Routes>
+          <Route path="/authorization" element={<Authorization />} />
+          <Route path="/registration" element={<Registration />} />
+          <Route path="/" element={<General />} />
+        </Routes>
+      </div>
     </main>
   );
 }

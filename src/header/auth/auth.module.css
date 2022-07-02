@@ -46,6 +46,7 @@ a {
 
 .activeBlockArrow {
   display: block;
+  margin-left: 50px;
 }
 .arrowImg {
   width: 40px;
@@ -53,4 +54,13 @@ a {
 }
 .activeBlockArrow:hover {
   cursor: pointer;
+}
+
+@media screen and (max-width: 1024px) {
+  .activeBlockArrow {
+    margin-left: 20px;
+  }
+  .wrap {
+    margin-right: 10px;
+  }
 }

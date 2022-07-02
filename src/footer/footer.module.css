@@ -3,7 +3,7 @@ footer {
 }
 
 .wrapper {
-  width: 1280px;
+  max-width: 1150px;
   margin: 0 auto;
   min-height: 10vh;
   box-sizing: border-box;
@@ -25,4 +25,9 @@ footer {
 
 .wrapper p {
   font-size: 20px;
+}
+@media screen and (max-width: 1024px) {
+  .wrapper p {
+    font-size: 15px;
+  }
 }

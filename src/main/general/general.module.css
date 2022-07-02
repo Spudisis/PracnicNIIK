@@ -39,3 +39,20 @@ li {
   width: 100vh;
   height: 50vh;
 }
+@media screen and (max-width: 1024px) {
+  .head {
+    font-size: 35px;
+  }
+  .PostOb {
+    font-size: 25px;
+    margin-left: 30px;
+  }
+  p {
+    font-size: 20px;
+    text-align: justify;
+    margin: 10px;
+  }
+  li {
+    font-size: 20px;
+  }
+}
