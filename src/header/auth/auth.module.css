@@ -1,4 +1,4 @@
-.wrapper {
+.wrap {
   display: flex;
   align-items: center;
   margin-right: 30px;
@@ -18,7 +18,7 @@
 }
 .auth_text:hover {
   cursor: pointer;
-  background-color: #0a1738;
+  background-color: #142c6c;
 }
 .reg {
   padding: 0px 10px;
@@ -34,4 +34,33 @@
 .reg:hover {
   cursor: pointer;
   background-color: gray;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.blockArrow {
+  display: none;
+}
+
+.activeBlockArrow {
+  display: block;
+  margin-left: 50px;
+}
+.arrowImg {
+  width: 40px;
+  height: 40px;
+}
+.activeBlockArrow:hover {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1024px) {
+  .activeBlockArrow {
+    margin-left: 20px;
+  }
+  .wrap {
+    margin-right: 10px;
+  }
 }

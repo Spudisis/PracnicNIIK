@@ -24,3 +24,17 @@
   margin: 10px;
   font-size: 20px;
 }
+
+@media (max-width: 1024px) and (min-width: 768px) {
+  .text {
+    margin: 0px;
+  }
+  .logo {
+    margin: 0px;
+  }
+  .text__change {
+    max-width: 300px;
+    margin: 10px;
+    font-size: 20px;
+  }
+}

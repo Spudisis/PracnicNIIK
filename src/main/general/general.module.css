@@ -1,0 +1,77 @@
+.head {
+  font-size: 40px;
+}
+.head {
+  display: flex;
+  justify-content: center;
+  padding: 30px 0px;
+}
+.PostOb {
+  font-size: 30px;
+  margin-left: 30px;
+}
+p {
+  font-size: 25px;
+  text-align: justify;
+}
+.info {
+  display: flex;
+  justify-content: center;
+}
+.info__metrology {
+  display: flex;
+  justify-content: space-between;
+}
+li {
+  font-size: 25px;
+}
+.imageBar {
+  width: 35%;
+  height: 35%;
+  margin-left: 20px;
+}
+.imageMetrology {
+  width: 50%;
+  height: 50%;
+  margin-left: 20px;
+}
+.projectBar {
+  width: 100vh;
+  height: 50vh;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+}
+.list li {
+  margin: 5px 40px;
+  transition: 0.5s all;
+  font-size: 25px;
+}
+hr {
+}
+.list li:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+  color: gold;
+}
+@media screen and (max-width: 1024px) {
+  .head {
+    font-size: 35px;
+  }
+  .PostOb {
+    font-size: 25px;
+    margin-left: 30px;
+  }
+  p {
+    font-size: 20px;
+    text-align: justify;
+    margin: 10px;
+  }
+  li {
+    font-size: 20px;
+  }
+}
