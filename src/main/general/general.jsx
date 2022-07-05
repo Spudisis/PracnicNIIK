@@ -1,12 +1,62 @@
 import s from "./general.module.css";
 
 function General() {
+  setTimeout(() => {
+    let arr = ["Postob", "ktt", "konsalt", "oos", "metr", "engin", "asu"];
+    let masId = [];
+    arr.forEach((element) =>
+      masId.push(document.querySelector("#" + element).offsetTop)
+    );
+    masId.forEach((element, n) => {
+      document
+        .querySelector("#" + arr[n] + "1")
+        .addEventListener("click", () => {
+          window.scroll({
+            top: element - 200,
+          });
+        });
+    });
+  }, 100);
+
   return (
     <div className="wrapper">
       <h2 className={s.head}>Услуги</h2>
+      <div>
+        <ul className={s.list}>
+          <li id="Postob1">
+            Поставка оборудования <hr />
+          </li>
+          <li id="ktt1">
+            Компьютерные технологические тренажеры
+            <hr />
+          </li>
+          <li id="konsalt1">
+            Консалтинг
+            <hr />
+          </li>
+          <li id="oos1">
+            Охрана окружающей среды
+            <hr />
+          </li>
+          <li id="metr1">
+            Метрология
+            <hr />
+          </li>
+          <li id="engin1">
+            Инжиниринг
+            <hr />
+          </li>
+          <li id="asu1">
+            Автоматизированные системы управления
+            <hr />
+          </li>
+        </ul>
+      </div>
       <hr />
       <div>
-        <h3 className={s.PostOb}>Поставка оборудования</h3>
+        <h3 className={s.PostOb} id="Postob">
+          Поставка оборудования
+        </h3>
         <p>
           За свою более чем 60-летнюю историю АО «НИИК» разрабатывал технические
           решения повышенной сложности для таких секторов химической
@@ -50,7 +100,9 @@ function General() {
       </div>
       <hr />
       <div className={s.ffh}>
-        <h3 className={s.PostOb}>Компьютерные технологические тренажеры</h3>
+        <h3 className={s.PostOb} id="ktt">
+          Компьютерные технологические тренажеры
+        </h3>
         <div className={s.info}>
           <div>
             <p>
@@ -94,7 +146,9 @@ function General() {
       </div>
       <hr />
       <div>
-        <h3 className={s.PostOb}>Консалтинг</h3>
+        <h3 className={s.PostOb} id="konsalt">
+          Консалтинг
+        </h3>
         <p>
           Одной из наиболее важных экономических задач является сокращение
           сроков строительства объектов. Во-первых, в условиях нестабильности и
@@ -130,7 +184,9 @@ function General() {
       </div>
       <hr />
       <div>
-        <h2 className={s.PostOb}>Охрана окружающей среды</h2>
+        <h2 className={s.PostOb} id="oos">
+          Охрана окружающей среды
+        </h2>
         <div className={s.info}>
           <div>
             <p>
@@ -165,7 +221,9 @@ function General() {
       </div>
       <hr />
       <div>
-        <h2 className={s.PostOb}>Метрология</h2>
+        <h2 className={s.PostOb} id="metr">
+          Метрология
+        </h2>
         <p>
           АО «НИИК» проводит аттестацию методик количественного химического
           анализа для целей аналитического, экологического и
@@ -206,7 +264,9 @@ function General() {
       </div>
       <hr />
       <div>
-        <h2 className={s.PostOb}>Инжиниринг</h2>
+        <h2 className={s.PostOb} id="engin">
+          Инжиниринг
+        </h2>
         <p>
           АО «НИИК» имеет возможности для выполнения комплекса
           технико-экономической документации по подготовке и осуществлению
@@ -217,7 +277,9 @@ function General() {
       </div>
       <hr />
       <div>
-        <h2 className={s.PostOb}>Автоматизированные системы управления</h2>
+        <h2 className={s.PostOb} id="asu">
+          Автоматизированные системы управления
+        </h2>
         <p>
           Автоматизированные системы управления технологическими процессами
           необходимы промышленным предприятиям любого масштаба и отрасли,

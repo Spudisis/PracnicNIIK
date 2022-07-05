@@ -39,6 +39,25 @@ li {
   width: 100vh;
   height: 50vh;
 }
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+}
+.list li {
+  margin: 5px 40px;
+  transition: 0.5s all;
+  font-size: 25px;
+}
+hr {
+}
+.list li:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+  color: gold;
+}
 @media screen and (max-width: 1024px) {
   .head {
     font-size: 35px;
