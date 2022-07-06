@@ -43,6 +43,7 @@
   .wrapper__change {
     max-width: 1024px;
     margin: 0 auto;
+    max-height: 9vh;
   }
 }
 @media (max-width: 1024px) and (min-width: 768px) {
