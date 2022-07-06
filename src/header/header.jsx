@@ -15,6 +15,7 @@ function Header() {
     wrapper = document.querySelector("#wrapper");
     arrow = document.querySelector("#arrow");
     k = wrapper.scrollHeight;
+    console.log(k);
   };
   function top() {
     arrow.onclick = () => {
@@ -32,7 +33,7 @@ function Header() {
       top();
     }
     heigth = window.pageYOffset;
-    heigth > k ? add() : del();
+    heigth > k + 100 ? add() : del();
   });
 
   function add() {

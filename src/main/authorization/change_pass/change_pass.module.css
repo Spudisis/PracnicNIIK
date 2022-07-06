@@ -1,0 +1,13 @@
+.wrapper {
+  max-width: 1150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 66vh;
+}
+.auth {
+  max-width: 400px;
+  height: 53vh;
+  background-color: rgb(4, 10, 25);
+  border-radius: 30px;
+}
