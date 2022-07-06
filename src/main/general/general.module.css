@@ -45,14 +45,14 @@ li {
   flex-wrap: wrap;
   justify-content: center;
   list-style: none;
+  text-align: center;
 }
 .list li {
   margin: 5px 40px;
   transition: 0.5s all;
   font-size: 25px;
 }
-hr {
-}
+
 .list li:hover {
   transform: scale(1.1);
   cursor: pointer;

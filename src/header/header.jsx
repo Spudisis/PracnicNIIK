@@ -1,6 +1,6 @@
-import Auth from "./auth/auth";
+import Auth from "./authButton/authButton";
 import s from "./header.module.css";
-import a from "./auth/auth.module.css";
+import a from "./authButton/authButton.module.css";
 import Logoname from "./logoName/logoname";
 
 function Header() {
@@ -56,6 +56,7 @@ function Header() {
       <div className={s.wrapper} id="wrapper">
         <div className={s.objects}>
           <Logoname />
+          <hr className={s.hrLine} />
           <Auth />
         </div>
       </div>

@@ -64,3 +64,45 @@ a {
     margin-right: 10px;
   }
 }
+@media (max-width: 768px) {
+  .authorization {
+    height: 100%;
+    line-height: 50px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+  .reg {
+    border-radius: 10px;
+    margin: 5px 0px;
+    font-size: 13px;
+  }
+  .auth_text {
+    border-radius: 10px;
+    margin: 5px 0px;
+    font-size: 13px;
+  }
+}
+@media (max-width: 425px) {
+  .authorization {
+    line-height: 40px;
+  }
+  .auth_text {
+    max-height: 40px;
+  }
+  .reg {
+    max-height: 40px;
+  }
+}
+@media (max-width: 390px) {
+  .authorization {
+    flex-direction: row;
+  }
+  .reg {
+    border-radius: 0 10px 10px 0px;
+  }
+  .auth_text {
+    border-radius: 10px 0 0 10px;
+  }
+} ;

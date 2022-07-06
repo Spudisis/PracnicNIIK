@@ -22,12 +22,41 @@ footer {
 .link {
   margin-right: 40px;
 }
-
+.hrLine {
+  width: 80%;
+  display: none;
+}
 .wrapper p {
   font-size: 20px;
 }
 @media screen and (max-width: 1024px) {
   .wrapper p {
     font-size: 15px;
+  }
+  .link {
+    margin-right: 10px;
+  }
+  .link p {
+    margin: 0px;
+  }
+  .info p {
+    font-size: 13px;
+  }
+}
+@media (max-width: 480px) {
+  .top_info {
+    display: flex;
+    flex-direction: column;
+  }
+  .link {
+    margin-bottom: 10px;
+  }
+  .info p {
+    margin: 0px 10px;
+  }
+}
+@media (max-width: 390px) {
+  .hrLine {
+    display: block;
   }
 }

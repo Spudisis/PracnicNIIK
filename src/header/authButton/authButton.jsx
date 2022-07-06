@@ -1,8 +1,6 @@
-import s from "./auth.module.css";
+import s from "./authButton.module.css";
 import { NavLink } from "react-router-dom";
 function Auth() {
-  
-
   return (
     <div className={s.wrap}>
       <div className={s.authorization}>

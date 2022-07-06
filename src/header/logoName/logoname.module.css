@@ -2,6 +2,7 @@
   display: flex;
   justify-content: left;
   align-items: center;
+  height: 100%;
 }
 .text {
   max-width: 400px;
@@ -13,7 +14,11 @@
   max-width: 10vw;
   max-height: 10vh;
 }
-
+.logoCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .logo__change {
   margin: 10px;
   max-width: 3vw;
@@ -38,3 +43,19 @@
     font-size: 20px;
   }
 }
+@media (max-width: 768px) {
+  .text {
+    font-size: 15px;
+    max-width: 300px;
+    margin: 30px 20px;
+  }
+}
+@media (max-width: 390px) {
+  .logoCenter {
+    flex-direction: column;
+  }
+  .text {
+    text-align: center;
+    margin: 5px;
+  }
+} ;

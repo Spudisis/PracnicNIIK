@@ -7,9 +7,10 @@ function Footer() {
       <div className={s.wrapper}>
         <div className={s.top_info}>
           <Logoname />
+          <hr className={s.hrLine} />
           <div className={s.link}>
-            <p>Почта: example141@yandex.ru</p>
-            <p>Телефон: 8 500 555 35-35</p>
+            <p>Почта:&nbsp;example141@yandex.ru</p>
+            <p>Телефон:&nbsp;8&nbsp;500&nbsp;555&nbsp;35-35</p>
           </div>
         </div>
         <hr />

@@ -40,11 +40,18 @@ function Logoname() {
   return (
     <NavLink to="/">
       <div className={s.wrapper}>
-        <img id="logoMain" className={s.logo} src="./img/Logo.png" alt="logo" />
+        <div className={s.logoCenter}>
+          <img
+            id="logoMain"
+            className={s.logo}
+            src="./img/Logo.png"
+            alt="logo"
+          />
 
-        <h1 className={s.text} id="textLogo">
-          Научно-исследовательский и проектный институт карбамида
-        </h1>
+          <h1 className={s.text} id="textLogo">
+            Научно-исследовательский и проектный институт карбамида
+          </h1>
+        </div>
       </div>
     </NavLink>
   );
