@@ -16,3 +16,8 @@ h2 {
   left: 1500px;
   position: absolute;
 }
+@media screen and (max-width: 800px) {
+  .wrapper {
+    background-color: rgb(7, 18, 44);
+  }
+}

@@ -96,7 +96,7 @@ function General() {
             className={s.imageBar}
           />
         </div>
-        <div className={s.projectBar}>blabla</div>
+        <div className={s.projectBar}></div>
       </div>
       <hr />
       <div className={s.ffh}>
@@ -258,7 +258,7 @@ function General() {
           <img
             src="./img/accreditation.jpg"
             alt="accreditation"
-            className={s.imageMetrology}
+            className={s.imageBar}
           />
         </div>
       </div>

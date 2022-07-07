@@ -30,13 +30,8 @@ li {
   height: 35%;
   margin-left: 20px;
 }
-.imageMetrology {
-  width: 50%;
-  height: 50%;
-  margin-left: 20px;
-}
+
 .projectBar {
-  width: 100vh;
   height: 50vh;
 }
 
@@ -73,5 +68,43 @@ li {
   }
   li {
     font-size: 20px;
+  }
+  .list {
+    padding: 0px;
+  }
+}
+@media screen and (max-width: 800px) {
+  .info {
+    flex-direction: column;
+  }
+  .info__metrology {
+    flex-direction: column;
+  }
+  p {
+    font-size: 15px;
+
+    padding: 5px;
+    margin: 0px 20px;
+  }
+  li {
+    font-size: 15px;
+  }
+  .imageBar {
+    width: 60%;
+    display: flex;
+    margin: 0 auto;
+  }
+}
+@media (max-width: 425px) {
+  h3 {
+    margin-left: 0px;
+    text-align: center;
+  }
+  p {
+    text-align: left;
+  }
+  .PostOb {
+    text-align: center;
+    margin-left: 0px;
   }
 }
