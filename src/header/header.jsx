@@ -15,7 +15,6 @@ function Header() {
     wrapper = document.querySelector("#wrapper");
     arrow = document.querySelector("#arrow");
     k = wrapper.scrollHeight;
-    console.log(k);
   };
   function top() {
     arrow.onclick = () => {

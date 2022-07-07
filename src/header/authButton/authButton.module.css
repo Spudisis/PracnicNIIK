@@ -66,33 +66,41 @@ a {
 }
 @media (max-width: 768px) {
   .authorization {
-    height: 100%;
+    height: 50%;
     line-height: 50px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
   }
   .reg {
-    border-radius: 10px;
     margin: 5px 0px;
     font-size: 13px;
+    padding: 5px;
   }
   .auth_text {
-    border-radius: 10px;
     margin: 5px 0px;
     font-size: 13px;
+    padding: 5px;
   }
 }
 @media (max-width: 425px) {
   .authorization {
-    line-height: 40px;
+    height: 50%;
+    line-height: 37px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
   }
   .auth_text {
+    border-radius: 10px;
     max-height: 40px;
+    padding: 0px 3px;
   }
   .reg {
+    border-radius: 10px;
     max-height: 40px;
+    padding: 0px 3px;
+  }
+  .activeBlockArrow {
+    display: none;
   }
 }
 @media (max-width: 390px) {
@@ -101,8 +109,10 @@ a {
   }
   .reg {
     border-radius: 0 10px 10px 0px;
+    padding: 0px 10px;
   }
   .auth_text {
     border-radius: 10px 0 0 10px;
+    padding: 0px 10px;
   }
 } ;

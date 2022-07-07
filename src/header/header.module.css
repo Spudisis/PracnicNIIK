@@ -1,13 +1,13 @@
 .wrapper {
   max-width: 1150px;
   margin: 0 auto;
-  min-height: 10vh;
+  min-height: 20%;
   box-sizing: border-box;
 }
 .wrapper__change {
   max-width: 1150px;
   margin: 0 auto;
-  max-height: 8vh;
+  max-height: 15%;
   box-sizing: border-box;
 }
 
@@ -46,15 +46,10 @@
   .wrapper__change {
     max-width: 1024px;
     margin: 0 auto;
-    max-height: 9vh;
   }
 }
 @media (max-width: 1024px) and (min-width: 768px) {
-  .header__fixed {
-    max-width: 1024px;
-  }
   .wrapper__change {
-    max-width: 1024px;
     margin: 0 auto;
   }
 }
