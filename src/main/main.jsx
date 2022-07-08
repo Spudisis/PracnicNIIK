@@ -10,7 +10,7 @@ function Main() {
     <main className={s.wrapper}>
       <div>
         <Routes>
-          <Route path="/authorization" element={<Authorization />} />
+          <Route path="/authorization/*" element={<Authorization />} />
           <Route path="/registration" element={<Registration />} />
           <Route path="/profile/*" element={<Profile />} />
           <Route

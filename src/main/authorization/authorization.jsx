@@ -10,7 +10,7 @@ function Authorization() {
         <form action="" className={s.form}>
           <div className={s.block}>
             <label className={s.text_field__label} htmlFor="login">
-              E-mail
+              E-mail/Номер телефона
             </label>
             <div
               className={`${s.text_field__icon} ${s.text_field__icon_email}`}

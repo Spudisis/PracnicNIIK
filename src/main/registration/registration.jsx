@@ -15,7 +15,7 @@ function Registration() {
             >
               <input
                 className={s.text_field__input}
-                type="text"
+                type="email"
                 name="login"
                 id="login"
                 placeholder="Login"
