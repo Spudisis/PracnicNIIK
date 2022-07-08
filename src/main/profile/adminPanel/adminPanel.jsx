@@ -1,22 +1,31 @@
 import s from "./adminPanel.module.css";
 import jsonMas from "./jsonMas.json";
+import AdsSites from "./AdsSites_sample.json";
 import { useState, useEffect } from "react";
 function Adminpanel() {
-  let newMasJson = [];
-  for (let k in jsonMas) {
-    let v = jsonMas[k];
-    newMasJson.push(v);
-  }
-
   const [n, nextPage] = useState(0);
   const [smallData, setSmallData] = useState([]);
   const [directionSort, setDirectionSort] = useState(true);
   const [page, setPage] = useState(1);
+  const [table, setTable] = useState(0);
+  let selectedValue;
+  function changeSelect() {
+    let selectBox = document.querySelector("#myselect");
+    selectedValue = selectBox.options[selectBox.selectedIndex].value;
+    setTable(selectedValue);
+    setSmallData(newMasJson);
+  }
+
+  let newMasJson = [];
+  if (table == 0) {
+    newMasJson = jsonMas;
+  } else {
+    newMasJson = AdsSites;
+  }
 
   useEffect(() => {
     setSmallData(newMasJson);
-    console.log("useEffect");
-  }, []);
+  }, [table]);
 
   const sortData = (field) => {
     const copyData = smallData.concat();
@@ -36,16 +45,29 @@ function Adminpanel() {
 
   let lengthJson = smallData.length;
   let countPages = Math.ceil(lengthJson / 13);
+  var size = Object.keys(newMasJson[0]);
   let DisplayData = smallData.slice(n, n + 13).map((info, n) => {
-    return (
-      <tr key={n}>
-        <td>{info.ID}</td>
-        <td>{info.Link}</td>
-        <td>{info.Topic}</td>
-        <td>{info.SiteID}</td>
-        <td>{info.Weight}</td>
-      </tr>
-    );
+    if (table == 0) {
+      return (
+        <tr key={n}>
+          <td>{info.ID}</td>
+          <td>{info.SiteID}</td>
+          <td>{info.Link}</td>
+          <td>{info.Topic}</td>
+          <td>{info.Weight}</td>
+        </tr>
+      );
+    } else {
+      return (
+        <tr key={n}>
+          <td>{info.ID}</td>
+          <td>{info.SiteID}</td>
+          <td>{info.Link}</td>
+          <td>{info.AdsSite}</td>
+          <td>{info.WhenAdd}</td>
+        </tr>
+      );
+    }
   });
 
   return (
@@ -56,44 +78,50 @@ function Adminpanel() {
             <tr>
               <th
                 onClick={() => {
-                  sortData("ID");
+                  sortData(size[0]);
                 }}
               >
-                ID
+                {size[0]}
               </th>
               <th
                 onClick={() => {
-                  sortData("Link");
+                  sortData(size[1]);
                 }}
               >
-                Link
+                {size[1]}
               </th>
               <th
                 onClick={() => {
-                  sortData("Topic");
+                  sortData(size[2]);
                 }}
               >
-                Topic
+                {size[2]}
               </th>
               <th
                 onClick={() => {
-                  sortData("SiteID");
+                  sortData(size[3]);
                 }}
               >
-                SiteID
+                {size[3]}
               </th>
               <th
                 onClick={() => {
-                  sortData("Weight");
+                  sortData(size[4]);
                 }}
               >
-                Weight
+                {size[4]}
               </th>
             </tr>
           </thead>
           <tbody>{DisplayData}</tbody>
         </table>
         <div className={s.buttons}>
+          <select name="tables" id="myselect" onChange={changeSelect}>
+            <option value="0">table1</option>
+            <option value="1">table2</option>
+            <option value="2">table3</option>
+            <option value="3">table4</option>
+          </select>
           <div>
             {page}/{countPages}
           </div>
