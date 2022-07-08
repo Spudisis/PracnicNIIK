@@ -25,6 +25,7 @@ function Adminpanel() {
 
   useEffect(() => {
     setSmallData(newMasJson);
+    
   }, [table]);
 
   const sortData = (field) => {
@@ -69,13 +70,21 @@ function Adminpanel() {
       );
     }
   });
-
+  // function addCol() {
+  //   let innerHtml = "";
+  //   const rowNameCol = document.querySelector("#rowNameCol");
+  //   for (let i = 0; i < size.length; i++) {
+  //     innerHtml += "<th>" + size[i] + "</th>";
+  //   }
+  //   rowNameCol.innerHTML = innerHtml;
+  //   console.log(innerHtml);
+  // }
   return (
     <div className={s.wrapper}>
       <div className={s.data}>
         <table className={s.table_dark}>
           <thead>
-            <tr>
+            <tr id="rowNameCol">
               <th
                 onClick={() => {
                   sortData(size[0]);
