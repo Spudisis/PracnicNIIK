@@ -1,13 +1,18 @@
 import s from "./adminPanel.module.css";
 import jsonMas from "./jsonMas.json";
 import AdsSites from "./AdsSites_sample.json";
+import nbb from "./nbbb.json";
+import table4 from "./table4.json";
 import { useState, useEffect } from "react";
+
 function Adminpanel() {
   const [n, nextPage] = useState(0);
   const [smallData, setSmallData] = useState([]);
   const [directionSort, setDirectionSort] = useState(true);
   const [page, setPage] = useState(1);
   const [table, setTable] = useState(0);
+  const [searchValue, setSearchValue] = useState("");
+
   let selectedValue;
   function changeSelect() {
     let selectBox = document.querySelector("#myselect");
@@ -19,14 +24,21 @@ function Adminpanel() {
   let newMasJson = [];
   if (table == 0) {
     newMasJson = jsonMas;
-  } else {
+  } else if (table == 1) {
     newMasJson = AdsSites;
+  } else if (table == 2) {
+    newMasJson = nbb;
+  } else if (table == 3) {
+    newMasJson = table4;
   }
 
   useEffect(() => {
     setSmallData(newMasJson);
-    
-  }, [table]);
+  }, [table, searchValue]);
+
+  useEffect(() => {
+    onSearchSend();
+  }, [searchValue]);
 
   const sortData = (field) => {
     const copyData = smallData.concat();
@@ -44,85 +56,108 @@ function Adminpanel() {
     setDirectionSort(!directionSort);
   };
 
+  const onSearchSend = () => {
+    let filtData;
+    if (searchValue) {
+      filtData = smallData.filter((el) => {
+        return el["Topic"].toLowerCase().includes(searchValue.toLowerCase());
+      });
+    }
+    if (!searchValue) {
+      return setSmallData(newMasJson);
+    }
+    setSmallData(filtData);
+  };
+
   let lengthJson = smallData.length;
   let countPages = Math.ceil(lengthJson / 13);
   var size = Object.keys(newMasJson[0]);
-  let DisplayData = smallData.slice(n, n + 13).map((info, n) => {
-    if (table == 0) {
-      return (
-        <tr key={n}>
-          <td>{info.ID}</td>
-          <td>{info.SiteID}</td>
-          <td>{info.Link}</td>
-          <td>{info.Topic}</td>
-          <td>{info.Weight}</td>
-        </tr>
-      );
-    } else {
-      return (
-        <tr key={n}>
-          <td>{info.ID}</td>
-          <td>{info.SiteID}</td>
-          <td>{info.Link}</td>
-          <td>{info.AdsSite}</td>
-          <td>{info.WhenAdd}</td>
-        </tr>
-      );
-    }
-  });
-  // function addCol() {
-  //   let innerHtml = "";
-  //   const rowNameCol = document.querySelector("#rowNameCol");
-  //   for (let i = 0; i < size.length; i++) {
-  //     innerHtml += "<th>" + size[i] + "</th>";
+
+  let tableBody;
+  function dataTable() {
+    addCol();
+    let tr = "";
+    tableBody = document.querySelector("#tableBody");
+    Object.values(smallData)
+      .slice(n, n + 13)
+      .forEach((value) => {
+        let td = "";
+        Object.values(value).forEach((per) => {
+          td += "<td>" + per + "</td>";
+        });
+        tr += "<tr>" + td + "</tr>";
+      });
+
+    return (tableBody.innerHTML = tr);
+  }
+  // let DisplayData = smallData.slice(n, n + 13).map((info, n) => {
+  //   addCol();
+  //   if (table == 0) {
+  //     return (
+  //       <tr key={n}>
+  //         <td>{info.ID}</td>
+  //         <td>{info.SiteID}</td>
+  //         <td>{info.Link}</td>
+  //         <td>{info.Topic}</td>
+  //         <td>{info.Weight}</td>
+  //       </tr>
+  //     );
+  //   } else if (table == 1) {
+  //     return (
+  //       <tr key={n}>
+  //         <td>{info.ID}</td>
+  //         <td>{info.SiteID}</td>
+  //         <td>{info.Link}</td>
+  //         <td>{info.AdsSite}</td>
+  //         <td>{info.WhenAdd}</td>
+  //       </tr>
+  //     );
+  //   } else {
+  //     return (
+  //       <tr key={n}>
+  //         <td>{info.ID}</td>
+  //         <td>{info.SiteID}</td>
+  //         <td>{info.Link}</td>
+  //         <td>{info.Topic}</td>
+  //         <td>{info.Weight}</td>
+  //         <td>{info.fdsfs}</td>
+  //       </tr>
+  //     );
   //   }
-  //   rowNameCol.innerHTML = innerHtml;
-  //   console.log(innerHtml);
-  // }
+  // });
+
+  function addCol() {
+    let innerHtml = "";
+    const rowNameCol = document.querySelector("#rowNameCol");
+    for (let i = 0; i < size.length; i++) {
+      innerHtml += "<th id ='th" + i + "'>" + size[i] + "</th>";
+    }
+    rowNameCol.innerHTML = innerHtml;
+    addFuncCol();
+  }
+  function addFuncCol() {
+    for (let i = 0; i < size.length; i++) {
+      document.querySelector("#th" + i).addEventListener("click", () => {
+        sortData(size[i]);
+      });
+    }
+  }
+
+  setTimeout(() => {
+    dataTable();
+  }, 10);
   return (
     <div className={s.wrapper}>
       <div className={s.data}>
         <table className={s.table_dark}>
           <thead>
             <tr id="rowNameCol">
-              <th
-                onClick={() => {
-                  sortData(size[0]);
-                }}
-              >
-                {size[0]}
-              </th>
-              <th
-                onClick={() => {
-                  sortData(size[1]);
-                }}
-              >
-                {size[1]}
-              </th>
-              <th
-                onClick={() => {
-                  sortData(size[2]);
-                }}
-              >
-                {size[2]}
-              </th>
-              <th
-                onClick={() => {
-                  sortData(size[3]);
-                }}
-              >
-                {size[3]}
-              </th>
-              <th
-                onClick={() => {
-                  sortData(size[4]);
-                }}
-              >
-                {size[4]}
-              </th>
+              <th></th>
             </tr>
           </thead>
-          <tbody>{DisplayData}</tbody>
+          <tbody id="tableBody">
+            <tr></tr>
+          </tbody>
         </table>
         <div className={s.buttons}>
           <select name="tables" id="myselect" onChange={changeSelect}>
@@ -134,18 +169,32 @@ function Adminpanel() {
           <div>
             {page}/{countPages}
           </div>
-          <input type="text" placeholder="Поиск" id="inputSearch" />
+          <div>
+            <input
+              type="text"
+              placeholder="Поиск"
+              id="inputSearch"
+              value={searchValue}
+              onChange={(e) => {
+                setSearchValue(e.target.value);
+              }}
+            />
+          </div>
 
           <button
             className={s.button}
-            onClick={() => (n > 0 ? nextPage(n - 13) & setPage(page - 1) : 1)}
+            onClick={() =>
+              n > 0 ? nextPage(n - 13) & setPage(page - 1) & dataTable() : 1
+            }
           >
             Назад
           </button>
           <button
             className={s.button}
             onClick={() =>
-              lengthJson > n + 15 ? nextPage(n + 13) & setPage(page + 1) : n
+              lengthJson > n + 15
+                ? nextPage(n + 13) & setPage(page + 1) & dataTable()
+                : n
             }
           >
             Далее
