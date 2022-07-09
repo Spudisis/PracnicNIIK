@@ -33,12 +33,12 @@ function Adminpanel() {
   }
 
   useEffect(() => {
-    setSmallData(newMasJson);
+    function newMas() {
+      setSmallData(newMasJson);
+      onSearchSend();
+    }
+    newMas();
   }, [table, searchValue]);
-
-  useEffect(() => {
-    onSearchSend();
-  }, [searchValue]);
 
   const sortData = (field) => {
     const copyData = smallData.concat();
@@ -90,41 +90,6 @@ function Adminpanel() {
 
     return (tableBody.innerHTML = tr);
   }
-  // let DisplayData = smallData.slice(n, n + 13).map((info, n) => {
-  //   addCol();
-  //   if (table == 0) {
-  //     return (
-  //       <tr key={n}>
-  //         <td>{info.ID}</td>
-  //         <td>{info.SiteID}</td>
-  //         <td>{info.Link}</td>
-  //         <td>{info.Topic}</td>
-  //         <td>{info.Weight}</td>
-  //       </tr>
-  //     );
-  //   } else if (table == 1) {
-  //     return (
-  //       <tr key={n}>
-  //         <td>{info.ID}</td>
-  //         <td>{info.SiteID}</td>
-  //         <td>{info.Link}</td>
-  //         <td>{info.AdsSite}</td>
-  //         <td>{info.WhenAdd}</td>
-  //       </tr>
-  //     );
-  //   } else {
-  //     return (
-  //       <tr key={n}>
-  //         <td>{info.ID}</td>
-  //         <td>{info.SiteID}</td>
-  //         <td>{info.Link}</td>
-  //         <td>{info.Topic}</td>
-  //         <td>{info.Weight}</td>
-  //         <td>{info.fdsfs}</td>
-  //       </tr>
-  //     );
-  //   }
-  // });
 
   function addCol() {
     let innerHtml = "";
