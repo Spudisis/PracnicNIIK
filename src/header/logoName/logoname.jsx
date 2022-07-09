@@ -1,5 +1,7 @@
 import s from "./logoname.module.css";
 import { NavLink } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
 
 function Logoname() {
   let logo;
