@@ -1,7 +1,10 @@
 from django.db import models
 
 # Create your models here.
-class Project(models.Model):
-    name=models.TextField(null=True, blank=True)
-    discription=models.TextField(null=True, blank=True)
+class Projects(models.Model):
+    pr_name = models.CharField(max_length=128)
+    pr_discript = models.TextField()
+    pr_photo = models.TextField()
 
+    class Meta:
+        db_table = 'projects'
