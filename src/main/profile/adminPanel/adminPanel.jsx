@@ -12,8 +12,13 @@ function Adminpanel() {
   const [page, setPage] = useState(1);
   const [table, setTable] = useState(0);
   const [searchValue, setSearchValue] = useState("");
-
+  let lengthJson;
+  let countPages;
+  var size;
+  let tableBody;
   let selectedValue;
+
+  let pagesTable;
   function changeSelect() {
     let selectBox = document.querySelector("#myselect");
     selectedValue = selectBox.options[selectBox.selectedIndex].value;
@@ -21,24 +26,38 @@ function Adminpanel() {
     setSmallData(newMasJson);
   }
 
-  let newMasJson = [];
-  if (table == 0) {
-    newMasJson = jsonMas;
-  } else if (table == 1) {
-    newMasJson = AdsSites;
-  } else if (table == 2) {
-    newMasJson = nbb;
-  } else if (table == 3) {
-    newMasJson = table4;
-  }
+  let newMasJson = smallData;
+  let data;
+  let getTableFrom = async () => {
+    let responst = await fetch("http://127.0.0.1:8000/project/");
+    data = await responst.json();
+    setSmallData(data);
+  };
+  useEffect(() => {
+    let newMas = async () => {
+      await getTableFrom();
+    };
+    newMas();
+  }, [table, table]);
+  useEffect(() => {
+    onSearchSend();
+  }, [searchValue]);
 
   useEffect(() => {
-    function newMas() {
-      setSmallData(newMasJson);
-      onSearchSend();
+    if (smallData != null) {
+      let renderTable = async () => {
+        lengthJson = await smallData.length;
+        countPages = await Math.ceil(lengthJson / 13);
+        size = await Object.keys(newMasJson[0]);
+        pagesTable = await document.querySelector("#countPages");
+        pagesTable.innerHTML = await countPages;
+        await addCol();
+        await addFuncCol();
+        await dataTableRender();
+      };
+      renderTable();
     }
-    newMas();
-  }, [table, searchValue]);
+  }, [smallData, n]);
 
   const sortData = (field) => {
     const copyData = smallData.concat();
@@ -58,24 +77,20 @@ function Adminpanel() {
 
   const onSearchSend = () => {
     let filtData;
-    if (searchValue) {
-      filtData = smallData.filter((el) => {
-        return el["Topic"].toLowerCase().includes(searchValue.toLowerCase());
-      });
-    }
+    console.log(searchValue);
     if (!searchValue) {
+      console.log(newMasJson);
       return setSmallData(newMasJson);
     }
+
+    filtData = newMasJson.filter((el) => {
+      return el["name"].toLowerCase().includes(searchValue.toLowerCase());
+    });
+
     setSmallData(filtData);
   };
 
-  let lengthJson = smallData.length;
-  let countPages = Math.ceil(lengthJson / 13);
-  var size = Object.keys(newMasJson[0]);
-
-  let tableBody;
-  function dataTable() {
-    addCol();
+  function dataTableRender() {
     let tr = "";
     tableBody = document.querySelector("#tableBody");
     Object.values(smallData)
@@ -107,10 +122,6 @@ function Adminpanel() {
       });
     }
   }
-
-  setTimeout(() => {
-    dataTable();
-  }, 10);
   return (
     <div className={s.wrapper}>
       <div className={s.data}>
@@ -132,7 +143,7 @@ function Adminpanel() {
             <option value="3">table4</option>
           </select>
           <div>
-            {page}/{countPages}
+            {page}/ <div id="countPages"></div>
           </div>
           <div>
             <input
@@ -149,7 +160,9 @@ function Adminpanel() {
           <button
             className={s.button}
             onClick={() =>
-              n > 0 ? nextPage(n - 13) & setPage(page - 1) & dataTable() : 1
+              n > 0
+                ? nextPage(n - 13) & setPage(page - 1) & dataTableRender()
+                : 1
             }
           >
             Назад
@@ -157,8 +170,8 @@ function Adminpanel() {
           <button
             className={s.button}
             onClick={() =>
-              lengthJson > n + 15
-                ? nextPage(n + 13) & setPage(page + 1) & dataTable()
+              lengthJson > n + 13
+                ? nextPage(n + 13) & setPage(page + 1) & dataTableRender()
                 : n
             }
           >

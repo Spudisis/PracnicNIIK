@@ -1,0 +1,11 @@
+.cards {
+  width: 100%;
+  height: 100%;
+  border: 1px solid white;
+}
+.card {
+  border: 1px solid white;
+}
+.textCard {
+  font-size: 10px;
+}
