@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .models import Projects
+from .models import Project
 from .serializers import ProjectSerializer
 
 # Create your views here.
@@ -11,6 +11,6 @@ def getRoutes(request):
 
 @api_view(['GET'])
 def getProject(request):
-    projects = Projects.objects.all()
+    projects = Project.objects.all()
     seralizer = ProjectSerializer(projects, many=True)
     return Response(seralizer.data)
