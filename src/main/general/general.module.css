@@ -53,6 +53,9 @@ li {
   cursor: pointer;
   color: gold;
 }
+.card p {
+  font-size: 10px;
+}
 @media screen and (max-width: 1024px) {
   .head {
     font-size: 35px;

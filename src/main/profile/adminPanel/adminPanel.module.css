@@ -32,34 +32,35 @@
 .button:hover {
   background-color: #1a73e8;
 }
-.table_dark {
-  font-size: 14px;
-  width: 100%;
-  text-align: left;
-  border-collapse: collapse;
-  background: #252f48;
-  margin: 10px;
-  margin: 0px;
-}
-.table_dark th {
-  color: #edb749;
-  border-bottom: 1px solid #37b5a5;
-  padding: 12px 17px;
+
+.pagination {
+  display: flex;
+  list-style-type: none;
+  justify-content: left;
+  align-items: center;
   cursor: pointer;
 }
-.table_dark td {
-  min-width: 100px;
-  color: #cad4d6;
-  border-bottom: 1px solid #37b5a5;
-  border-right: 1px solid #37b5a5;
-  padding: 7px 17px;
+
+.page_item {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  border: 1px solid white;
+  background-color: #fff;
+  cursor: pointer;
 }
-.table_dark tr:last-child td {
-  border-bottom: none;
+
+.pageLink {
+  display: flex;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: black;
+  text-decoration: none;
+  text-align: center;
+  font-size: 20px;
 }
-.table_dark td:last-child {
-  border-right: none;
-}
-.table_dark tr:hover td {
-  text-decoration: underline;
+
+.active {
+  background-color: gold;
 }

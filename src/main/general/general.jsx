@@ -1,5 +1,7 @@
 import s from "./general.module.css";
+import ProjectCard from "./projectCard/projectCard";
 
+import shop from "./shop.json";
 function General() {
   setTimeout(() => {
     let arr = ["Postob", "ktt", "konsalt", "oos", "metr", "engin", "asu"];
@@ -96,7 +98,9 @@ function General() {
             className={s.imageBar}
           />
         </div>
-        <div className={s.projectBar}></div>
+        <div className={s.projectBar}>
+          <ProjectCard type="1" />
+        </div>
       </div>
       <hr />
       <div className={s.ffh}>
@@ -143,6 +147,9 @@ function General() {
           подхода к проблеме подготовки кадров и поддерживания их требуемого
           профессионального уровня.
         </p>
+        <div className={s.projectBar}>
+          <ProjectCard type="2" />
+        </div>
       </div>
       <hr />
       <div>
@@ -181,6 +188,9 @@ function General() {
           реконструкции, расширении и техническом перевооружении уже
           эксплуатируемых производств.
         </p>
+        <div className={s.projectBar}>
+          <ProjectCard type="3" />
+        </div>
       </div>
       <hr />
       <div>
@@ -218,6 +228,9 @@ function General() {
           (НДТ), и подлежат прохождению государственной экологической
           экспертизы.
         </p>
+        <div className={s.projectBar}>
+          <ProjectCard type="4" />
+        </div>
       </div>
       <hr />
       <div>
@@ -261,6 +274,9 @@ function General() {
             className={s.imageBar}
           />
         </div>
+        <div className={s.projectBar}>
+          <ProjectCard type="5" />
+        </div>
       </div>
       <hr />
       <div>
@@ -274,6 +290,9 @@ function General() {
           производств. АО «НИИК» может выполнять функции генерального
           проектировщика химических производств.
         </p>
+        <div className={s.projectBar}>
+          <ProjectCard type="6" />
+        </div>
       </div>
       <hr />
       <div>
@@ -314,6 +333,9 @@ function General() {
           контрольно-измерительных приборов и приводная арматура как
           отечественного так и зарубежного производства.
         </p>
+        <div className={s.projectBar}>
+          <ProjectCard type="7" />
+        </div>
       </div>
     </div>
   );
