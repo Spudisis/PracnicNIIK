@@ -5,6 +5,10 @@ import General from "./general/general";
 import Registration from "./registration/registration";
 import Changepass from "./authorization/change_pass/change_pass";
 import Profile from "./profile/profile";
+import PageHistory from "./pageHistory/pageHistory";
+import PageToDO from "./pageToDo/pageToDo";
+import PageConferention from "./pageConferencion/pageConferencion";
+import PageContacts from "./pageContacts/pageContacts";
 function Main() {
   return (
     <main className={s.wrapper}>
@@ -18,6 +22,10 @@ function Main() {
             element={<Changepass />}
           />
           <Route path="/" element={<General />} />
+          <Route path="/history" element={<PageHistory />} />
+          <Route path="/toDonikk" element={<PageToDO />} />
+          <Route path="/conferencion" element={<PageConferention />} />
+          <Route path="/contacts" element={<PageContacts />} />
         </Routes>
       </div>
     </main>

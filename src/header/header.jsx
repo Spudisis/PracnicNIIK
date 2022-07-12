@@ -2,18 +2,22 @@ import Auth from "./authButton/authButton";
 import s from "./header.module.css";
 import a from "./authButton/authButton.module.css";
 import Logoname from "./logoName/logoname";
+import ProfileButton from "./profileButton/profileButton";
+import Navigation from "../main/navigation/navigation";
 
 function Header() {
   let heigth;
   let header;
   let wrapper;
   let arrow;
+  let navigation;
   let k;
 
   const load = function () {
     header = document.querySelector("#header");
     wrapper = document.querySelector("#wrapper");
     arrow = document.querySelector("#arrow");
+    navigation = document.querySelector("#navigation");
     k = wrapper.scrollHeight;
   };
   function top() {
@@ -41,6 +45,8 @@ function Header() {
     wrapper.classList.remove(s.wrapper);
     arrow.classList.add(a.activeBlockArrow);
     arrow.classList.remove(a.blockArrow);
+    navigation.classList.remove(s.navigation);
+    navigation.classList.add(s.inactiveNavigation);
   }
   function del() {
     header.classList.remove(s.header__fixed);
@@ -48,16 +54,23 @@ function Header() {
     wrapper.classList.add(s.wrapper);
     arrow.classList.remove(a.activeBlockArrow);
     arrow.classList.add(a.blockArrow);
+    navigation.classList.remove(s.inactiveNavigation);
+    navigation.classList.add(s.navigation);
   }
-
+  let a = false;
   return (
     <header id="header" className={s.header__main}>
       <div className={s.wrapper} id="wrapper">
         <div className={s.objects}>
           <Logoname />
           <hr className={s.hrLine} />
-          <Auth />
+          {a == true ? <ProfileButton /> : <Auth />}
         </div>
+      </div>
+
+      <div className={s.navigation} id="navigation">
+        <hr />
+        <Navigation />
       </div>
     </header>
   );
