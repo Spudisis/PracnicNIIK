@@ -27,7 +27,7 @@ function PageToDO() {
   }, 100);
   return (
     <div className={s.wrapper}>
-      <h2 className={s.head}>Услуги</h2>
+      <h2 className={s.head}>Деятельность НИИК</h2>
       <div>
         <ul className={s.list}>
           <li id="ammiak1">

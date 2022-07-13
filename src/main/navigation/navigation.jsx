@@ -6,7 +6,9 @@ function Navigation() {
       <NavLink to="/" className={s.buttonPage}>
         Главная
       </NavLink>
-
+      <NavLink to="/projects" className={s.buttonPage}>
+        Проекты
+      </NavLink>
       <NavLink to="/history" className={s.buttonPage}>
         История
       </NavLink>
