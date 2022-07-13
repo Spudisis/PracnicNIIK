@@ -125,6 +125,12 @@
   display: none;
 }
 
+.errors {
+  margin: 30px 20px 0px 0px;
+  padding: 0px;
+  text-align: center;
+}
+
 @keyframes joinBtn {
   0% {
     border: 1px solid white;

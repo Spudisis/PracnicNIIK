@@ -21,3 +21,7 @@ h2 {
     background-color: rgb(7, 18, 44);
   }
 }
+
+p {
+  text-indent: 1.5em;
+}

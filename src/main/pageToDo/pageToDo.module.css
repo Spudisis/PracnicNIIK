@@ -1,32 +1,19 @@
-.head {
-  font-size: 40px;
-  display: flex;
-  justify-content: center;
-  padding: 30px 0px;
+.wrapper {
+  max-width: 1150px;
+  min-height: 66vh;
+}
+
+p {
+  font-size: 25px;
+  text-align: justify;
+  
 }
 .PostOb {
   font-size: 30px;
   margin-left: 30px;
 }
-p {
-  font-size: 25px;
-  text-align: justify;
-}
-.info {
-  display: flex;
-  justify-content: center;
-}
-.info__metrology {
-  display: flex;
-  justify-content: space-between;
-}
 li {
   font-size: 25px;
-}
-.imageBar {
-  width: 35%;
-  height: 35%;
-  margin-left: 20px;
 }
 
 .projectBar {
@@ -45,22 +32,39 @@ li {
   transition: 0.5s all;
   font-size: 25px;
 }
+
 .list li:hover {
   transform: scale(1.1);
   cursor: pointer;
   color: gold;
 }
-.card p {
-  font-size: 10px;
+.head {
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+  padding: 30px 0px;
+}
+.imageBar {
+  width: 35%;
+  height: 35%;
+  margin-left: 20px;
+  float: right;
+}
+.imgCian {
+  display: flex;
+  justify-content: space-around;
 }
 
+.imgCian img {
+  width: 40%;
+}
+
+li {
+  padding: 5px 0px;
+}
 @media screen and (max-width: 1024px) {
   .head {
     font-size: 35px;
-  }
-  .PostOb {
-    font-size: 25px;
-    margin-left: 30px;
   }
   p {
     font-size: 20px;
@@ -94,6 +98,7 @@ li {
     width: 60%;
     display: flex;
     margin: 0 auto;
+    padding: 0px 0px 0px 10px;
   }
 }
 @media screen and (max-width: 425px) {
@@ -107,5 +112,10 @@ li {
   .PostOb {
     text-align: center;
     margin-left: 0px;
+  }
+  .imageBar {
+    float: none;
+    width: 100%;
+    padding: 0px;
   }
 }

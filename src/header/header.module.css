@@ -32,6 +32,14 @@
   display: none;
   width: 80%;
 }
+.navigation {
+  display: block;
+}
+
+.inactiveNavigation {
+  display: none;
+}
+
 @keyframes show_anim {
   0% {
     opacity: 0;

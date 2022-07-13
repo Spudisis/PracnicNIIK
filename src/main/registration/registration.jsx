@@ -1,11 +1,24 @@
 import s from "./registration.module.css";
+import { useForm } from "react-hook-form";
 function Registration() {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+    let errors = document.querySelector("#errors");
+    data.pass != data.passRepeat
+      ? alert("Пароли должны быть одинаковы")
+      : alert(JSON.stringify(data));
+  };
   return (
     <div className={s.wrapper}>
       <div className={s.auth}>
         <img src="./img/loginImg.png" alt="niik" />
         <h3>Регистрация</h3>
-        <form action="" className={s.form}>
+        <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
           <div className={s.block}>
             <label className={s.text_field__label} htmlFor="login">
               E-mail
@@ -18,7 +31,8 @@ function Registration() {
                 type="email"
                 name="login"
                 id="login"
-                placeholder="Login"
+                placeholder="Email"
+                {...register("Email", { required: true })}
               />
             </div>
           </div>
@@ -35,6 +49,7 @@ function Registration() {
                 name="login"
                 id="name"
                 placeholder="Имя"
+                {...register("FIO", { required: true })}
               />
             </div>
           </div>
@@ -49,6 +64,7 @@ function Registration() {
                 name="phone"
                 id="phone"
                 placeholder="Номер телефона"
+                {...register("phone", { required: true })}
               />
             </div>
           </div>
@@ -65,6 +81,13 @@ function Registration() {
                 name="password"
                 id="password"
                 placeholder="Password"
+                {...register("pass", {
+                  required: "Поле обязательно к заполнению",
+                  minLength: {
+                    value: 5,
+                    message: "Пароль должен содержать минимум 5 символов",
+                  },
+                })}
               />
             </div>
           </div>
@@ -81,6 +104,13 @@ function Registration() {
                 name="password_repeat"
                 id="password_repeat"
                 placeholder="Password repeat"
+                {...register("passRepeat", {
+                  required: "Поле обязательно к заполнению",
+                  minLength: {
+                    value: 5,
+                    message: "Пароль должен содержать минимум 5 символов",
+                  },
+                })}
               />
             </div>
           </div>
@@ -92,6 +122,17 @@ function Registration() {
             id="buttonAuth"
             className={s.hideButton}
           ></button>
+          <div id="errors">
+            {(errors?.Email ||
+              errors?.pass ||
+              errors?.passRepeat ||
+              errors?.phone ||
+              errors?.FIO) && (
+              <p className={s.errors}>
+                {errors?.pass?.message || "Необходимо заполнить каждое поле"}
+              </p>
+            )}
+          </div>
         </form>
       </div>
     </div>
