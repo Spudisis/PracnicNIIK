@@ -1,9 +1,9 @@
-function DetailRowView({ person }) {
+function DetailRowView({ person, data }) {
   function dataTableRender() {
     let div = "";
     let personDiv = document.querySelector("#person");
     Object.values(person).forEach((value, n) => {
-      div += "<div>" + value + "</div>";
+      div += "<input value='" + value + "'></input>";
     });
     return (personDiv.innerHTML = div);
   }
@@ -11,7 +11,13 @@ function DetailRowView({ person }) {
     dataTableRender();
   }, 100);
 
-  return <div id="person"></div>;
+  return (
+    <div>
+      <div id="person"></div>
+      <button>delete</button>
+      <button>update</button>
+    </div>
+  );
 }
 
 export default DetailRowView;

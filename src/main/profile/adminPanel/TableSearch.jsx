@@ -3,28 +3,16 @@ import { useState } from "react";
 import { set } from "lodash";
 export default (props) => {
   const [value, setValue] = useState("");
-  const valueChangeHandler = (event) => {
-    setValue(event.target.value);
-  };
   return (
     <div className={s.input}>
       <input
         type="text"
         className={s.form}
-        placeholder="Recipient's username"
-        aria-label="Recipient's username"
+        placeholder="Search"
+        aria-label="Search"
         aria-describedby="button-addon2"
-        value={value}
-        onChange={valueChangeHandler}
+        onChange={(e) => props.onSearch(e.target.value)}
       />
-      <button
-        className={s.btn}
-        type="button"
-        id="button-addon2"
-        onClick={() => props.onSearch(value)}
-      >
-        Button
-      </button>
     </div>
   );
 };

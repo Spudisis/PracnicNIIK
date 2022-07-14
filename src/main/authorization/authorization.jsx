@@ -1,6 +1,7 @@
 import s from "./authorization.module.css";
 import { useForm } from "react-hook-form";
-import { NavLink } from "react-router-dom";
+import { NavLink, Routes, Route } from "react-router-dom";
+import Changepass from "./change_pass/change_pass";
 function Authorization() {
   const {
     register,
