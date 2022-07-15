@@ -1,17 +1,17 @@
-import s from "./adminPanel.module.css";
-import jsonMas from "./jsonMas.json";
-import AdsSites from "./AdsSites_sample.json";
-import nbb from "./nbbb.json";
-import table4 from "./table4.json";
+import s from "../adminPanel/adminPanel.module.css";
+import jsonMas from "../adminPanel/jsonMas.json";
+import AdsSites from "../adminPanel/AdsSites_sample.json";
+import nbb from "../adminPanel/nbbb.json";
+import table4 from "../adminPanel/table4.json";
 import React, { useState, useEffect } from "react";
 import { Component } from "react";
-import Loader from "./loader.jsx";
-import Table from "./table";
-import DetailRowView from "./DetailRowView.jsx";
+import Loader from "../adminPanel/loader.jsx";
+import Table from "../adminPanel/table";
+import DetailRowView from "../adminPanel/DetailRowView.jsx";
 import _, { clone, forEach } from "lodash";
 import ReactPaginate from "react-paginate";
-import TableSearch from "./TableSearch";
-class Adminpanel extends Component {
+import TableSearch from "../adminPanel/TableSearch";
+class Table3 extends Component {
   state = {
     isModeSelected: false,
     isLoading: true,
@@ -24,7 +24,7 @@ class Adminpanel extends Component {
   };
 
   async componentDidMount() {
-    let respons = await fetch("http://127.0.0.1:8000/project/");
+    let respons = await fetch("https://jsonplaceholder.typicode.com/photos");
     let data = await respons.json();
 
     this.setState({
@@ -32,6 +32,7 @@ class Adminpanel extends Component {
       data,
     });
   }
+
   onSort = (sortField) => {
     const clonedData = this.state.data.concat();
     const sort = this.state.sort === "asc" ? "desc" : "asc";
@@ -44,13 +45,10 @@ class Adminpanel extends Component {
     });
   };
   onRowSelect = (row) => {
-    console.log(row);
-
     this.setState({ row: row });
   };
 
   pageChangeHandler = ({ selected }) => {
-    console.log("click");
     this.setState({ currentPage: selected });
   };
 
@@ -59,15 +57,15 @@ class Adminpanel extends Component {
   };
   getFilteredData() {
     const { data, search } = this.state;
-    console.log(search);
-    if (!search) {
+    let n = data.filter((item) => {
+      return item["title"].toLowerCase().includes(search.toLowerCase());
+    });
+    if (!search || n.length == 0) {
       return data;
     }
-    return data.filter((item) => {
-      return item["Category"].toLowerCase().includes(search.toLowerCase());
-    });
+    return n;
   }
-
+  debugger;
   render() {
     const filteredData = this.getFilteredData();
     const pageSize = 13;
@@ -90,6 +88,8 @@ class Adminpanel extends Component {
               />
             </React.Fragment>
           )}
+        </div>
+        <div className={s.func}>
           {this.state.data.length > pageSize ? (
             <ReactPaginate
               breakLabel="..."
@@ -107,15 +107,14 @@ class Adminpanel extends Component {
             />
           ) : null}
 
-          <div className={s.buttons}>
-            <div></div>
-            <div></div>
-          </div>
+          <div className={s.buttons}></div>
         </div>
-        {this.state.row ? <DetailRowView person={this.state.row} /> : null}
+        {this.state.row ? (
+          <DetailRowView person={this.state.row} data={this.state.data} />
+        ) : null}
       </div>
     );
   }
 }
 
-export default Adminpanel;
+export default Table3;

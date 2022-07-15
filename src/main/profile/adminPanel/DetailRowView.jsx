@@ -1,17 +1,23 @@
-function DetailRowView({ person }) {
+import { useEffect } from "react";
+
+function DetailRowView({ person, data }) {
   function dataTableRender() {
     let div = "";
     let personDiv = document.querySelector("#person");
     Object.values(person).forEach((value, n) => {
-      div += "<div>" + value + "</div>";
+      div += "<input value='" + value + "'></input>";
     });
     return (personDiv.innerHTML = div);
   }
-  setTimeout(() => {
+  useEffect(() => {
     dataTableRender();
-  }, 100);
-
-  return <div id="person"></div>;
+  }, []);
+  return (
+    <div>
+      <button>изменить</button>
+      <div id="person"></div>
+    </div>
+  );
 }
 
 export default DetailRowView;

@@ -10,11 +10,11 @@
 .table_dark th {
   color: #edb749;
   border-bottom: 1px solid #37b5a5;
-  padding: 12px 17px;
+  padding: 12px 5px 12px 12px;
   cursor: pointer;
+  min-width: 50px;
 }
 .table_dark td {
-  min-width: 100px;
   color: #cad4d6;
   border-bottom: 1px solid #37b5a5;
   border-right: 1px solid #37b5a5;
