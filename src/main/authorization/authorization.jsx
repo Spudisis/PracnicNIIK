@@ -1,35 +1,48 @@
 import s from "./authorization.module.css";
 import { useForm } from "react-hook-form";
-import { NavLink } from "react-router-dom";
-function Authorization() {
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm();
-  const onSubmit = (data) => {
-    alert(JSON.stringify(data));
-  };
+import { NavLink,Link, Navigate } from "react-router-dom";
+import {useState} from "react";
+import {connect} from "react-redux";
+import {login} from '../../auth.action'
+
+const Authorization = ({login, isAuthenticated})=> {
+    const[formData, setFormData]=useState({
+      email: "",
+      password: ""
+    });
+    const {email, password} = formData;
+    const onChange = e => setFormData({... formData,[e.target.name]:e.target.value});
+    const onSubmit = e =>{
+      e.preventDefault();
+      login(email,password);
+    };
+
+    if (isAuthenticated){
+      return <Navigate to="/" />;
+    }
+  
   return (
     <div className={s.wrapper}>
       <div className={s.auth}>
         <img src="./img/loginImg.png" alt="niik" />
         <h3>Авторизация</h3>
 
-        <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
+        <form onSubmit={e=>onSubmit(e)} className={s.form}>
           <div className={s.block}>
-            <label className={s.text_field__label} htmlFor="login">
-              E-mail/Номер телефона
+            <label className={s.text_field__label} htmlFor="email">
+              E-mail
               <div
                 className={`${s.text_field__icon} ${s.text_field__icon_email}`}
               >
                 <input
                   className={s.text_field__input}
                   type="text"
-                  name="login"
-                  id="login"
-                  placeholder="Login"
-                  {...register("Email", { required: true })}
+                  name="email"
+                  id="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={e=>onChange(e)}
+                  required
                 />
               </div>
             </label>
@@ -47,7 +60,10 @@ function Authorization() {
                 name="password"
                 id="password"
                 placeholder="Password"
-                {...register("pass", { required: true })}
+                value={password}
+                onChange={e=>onChange(e)}
+                minLength='6'
+                required
               />
             </div>
             <NavLink to="./change_password" className={s.changePass}>
@@ -57,21 +73,18 @@ function Authorization() {
           <label htmlFor="buttonAuth" className={s.join}>
             Войти
           </label>
-          <button
-            type="submit"
-            id="buttonAuth"
-            className={s.hideButton}
-          ></button>
 
-          <div>
-            {(errors?.Email || errors?.pass) && (
-              <p className={s.errors}>Неверный логин или пароль</p>
-            )}
-          </div>
+          <button type="submit" id="buttonAuth" className={s.hideButton}>
+
+          </button>
+          
         </form>
       </div>
     </div>
   );
-}
+};
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
 
-export default Authorization;
+export default connect(mapStateToProps,{login})(Authorization);

@@ -1,26 +1,44 @@
 import s from "./registration.module.css";
 import { useForm } from "react-hook-form";
-function Registration() {
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
-    let errors = document.querySelector("#errors");
-    data.pass != data.passRepeat
-      ? alert("Пароли должны быть одинаковы")
-      : alert(JSON.stringify(data));
+import { signup } from "../../auth.action";
+import { connect } from "react-redux";
+import { useState } from "react";
+import { NavLink,Link, Navigate } from "react-router-dom";
+import { map } from "jquery";
+
+const Registration=({signup,isAuthenticated}) =>{
+  const [accountCreated,setAccountCreated]=useState(false);
+  const[formData, setFormData]=useState({
+    name: "",
+    phone: "",
+    email: "",
+    password: "",
+    re_password:""
+  });
+  const {email,name, phone,re_password,password} = formData;
+  const onChange = e => setFormData({... formData,[e.target.name]:e.target.value});
+  const onSubmit = e =>{
+    e.preventDefault();
+    if (password === re_password){
+      signup(name,email, phone,password,re_password);
+      setAccountCreated(true);
+    }
   };
+
+  if (isAuthenticated){
+    return <Navigate to="/" />;
+  }
+  if (accountCreated){
+    return <Navigate to="/" />;
+  }
   return (
     <div className={s.wrapper}>
       <div className={s.auth}>
         <img src="./img/loginImg.png" alt="niik" />
         <h3>Регистрация</h3>
-        <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
+        <form onSubmit={e=>onSubmit(e)} className={s.form}>
           <div className={s.block}>
-            <label className={s.text_field__label} htmlFor="login">
+            <label className={s.text_field__label} htmlFor="email">
               E-mail
             </label>
             <div
@@ -29,16 +47,18 @@ function Registration() {
               <input
                 className={s.text_field__input}
                 type="email"
-                name="login"
-                id="login"
+                name="email"
+                id="email"
+                value={email}
                 placeholder="Email"
-                {...register("Email", { required: true })}
+                onChange={e=>onChange(e)}
+                required
               />
             </div>
           </div>
           <div className={s.block}>
             <label className={s.text_field__label} htmlFor="name">
-              Имя
+              ФИО
             </label>
             <div
               className={`${s.text_field__icon} ${s.text_field__icon_email}`}
@@ -46,10 +66,12 @@ function Registration() {
               <input
                 className={s.text_field__input}
                 type="text"
-                name="login"
+                name="name"
                 id="name"
-                placeholder="Имя"
-                {...register("FIO", { required: true })}
+                value={name}
+                placeholder="ФИО"
+                onChange={e=>onChange(e)}
+                required
               />
             </div>
           </div>
@@ -63,8 +85,10 @@ function Registration() {
                 type="tel"
                 name="phone"
                 id="phone"
+                value={phone}
                 placeholder="Номер телефона"
-                {...register("phone", { required: true })}
+                onChange={e=>onChange(e)}
+                required
               />
             </div>
           </div>
@@ -80,19 +104,16 @@ function Registration() {
                 type="password"
                 name="password"
                 id="password"
+                value={password}
                 placeholder="Password"
-                {...register("pass", {
-                  required: "Поле обязательно к заполнению",
-                  minLength: {
-                    value: 5,
-                    message: "Пароль должен содержать минимум 5 символов",
-                  },
-                })}
+                onChange={e=>onChange(e)}
+                minLength='6'
+                required
               />
             </div>
           </div>
           <div className={s.block}>
-            <label className={s.text_field__label} htmlFor="password_repeat">
+            <label className={s.text_field__label} htmlFor="re_password">
               Повторите пароль
             </label>
             <div
@@ -101,16 +122,13 @@ function Registration() {
               <input
                 className={s.text_field__input}
                 type="password"
-                name="password_repeat"
-                id="password_repeat"
+                name="re_password"
+                id="re_password"
+                value={re_password}
                 placeholder="Password repeat"
-                {...register("passRepeat", {
-                  required: "Поле обязательно к заполнению",
-                  minLength: {
-                    value: 5,
-                    message: "Пароль должен содержать минимум 5 символов",
-                  },
-                })}
+                onChange={e=>onChange(e)}
+                minLength='6'
+                required
               />
             </div>
           </div>
@@ -122,21 +140,12 @@ function Registration() {
             id="buttonAuth"
             className={s.hideButton}
           ></button>
-          <div id="errors">
-            {(errors?.Email ||
-              errors?.pass ||
-              errors?.passRepeat ||
-              errors?.phone ||
-              errors?.FIO) && (
-              <p className={s.errors}>
-                {errors?.pass?.message || "Необходимо заполнить каждое поле"}
-              </p>
-            )}
-          </div>
         </form>
       </div>
     </div>
   );
 }
-
-export default Registration;
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+export default connect(mapStateToProps,{signup})(Registration);

@@ -4,8 +4,9 @@ import a from "./authButton/authButton.module.css";
 import Logoname from "./logoName/logoname";
 import ProfileButton from "./profileButton/profileButton";
 import Navigation from "../main/navigation/navigation";
+import {connect}  from 'react-redux';
 
-function Header() {
+const Header= ({isAuthenticated}) => {
   let heigth;
   let header;
   let wrapper;
@@ -57,14 +58,14 @@ function Header() {
     navigation.classList.remove(s.inactiveNavigation);
     navigation.classList.add(s.navigation);
   }
-  let a = false;
+
   return (
     <header id="header" className={s.header__main}>
       <div className={s.wrapper} id="wrapper">
         <div className={s.objects}>
           <Logoname />
           <hr className={s.hrLine} />
-          {a == true ? <ProfileButton /> : <Auth />}
+          {isAuthenticated? <ProfileButton /> : <Auth />}
         </div>
       </div>
 
@@ -75,5 +76,8 @@ function Header() {
     </header>
   );
 }
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+})
 
-export default Header;
+export default connect(mapStateToProps)(Header);

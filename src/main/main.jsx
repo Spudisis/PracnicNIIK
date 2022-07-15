@@ -10,6 +10,8 @@ import PageToDO from "./pageToDo/pageToDo";
 import PageConferention from "./pageConferencion/pageConferencion";
 import PageContacts from "./pageContacts/pageContacts";
 import PageMain from "./pageMain/pageMain";
+import ConfirmPassword from "./authorization/change_pass/change_pass_confirm";
+import Activation from "./registration/activation";
 function Main() {
   return (
     <main className={s.wrapper}>
@@ -28,6 +30,11 @@ function Main() {
           <Route path="/conferencion" element={<PageConferention />} />
           <Route path="/contacts" element={<PageContacts />} />
           <Route path="/" element={<PageMain />} />
+          <Route
+            path="/authorization/change_password_confirm/:uid/:token"
+            element={<ConfirmPassword/>}
+          />
+          <Route path="/activation/:uid/:token" element={<Activation />} />
         </Routes>
       </div>
     </main>
