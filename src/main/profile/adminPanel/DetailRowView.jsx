@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 function DetailRowView({ person, data }) {
   function dataTableRender() {
     let div = "";
@@ -7,15 +9,13 @@ function DetailRowView({ person, data }) {
     });
     return (personDiv.innerHTML = div);
   }
-  setTimeout(() => {
+  useEffect(() => {
     dataTableRender();
-  }, 100);
-
+  }, []);
   return (
     <div>
+      <button>изменить</button>
       <div id="person"></div>
-      <button>delete</button>
-      <button>update</button>
     </div>
   );
 }

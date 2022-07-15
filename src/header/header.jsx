@@ -36,7 +36,7 @@ function Header() {
       top();
     }
     heigth = window.pageYOffset;
-    heigth > k + 150 ? add() : del();
+    heigth > k + 180 ? add() : del();
   });
 
   function add() {

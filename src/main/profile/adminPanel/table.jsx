@@ -1,6 +1,6 @@
 import React from "react";
 import s from "./table.module.css";
-import { Component } from "react";
+import { useEffect } from "react";
 function Table(props) {
   let size;
   function addCol() {

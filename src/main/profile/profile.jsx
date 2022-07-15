@@ -20,7 +20,7 @@ function Profile() {
           to="/profile/orders"
           className={({ isActive }) => (isActive ? s.activeLink : s.link)}
         >
-          Заказы
+          Проекты
         </NavLink>
 
         <NavLink
