@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from .models import Project,Employee
+from .models import Project,Employee,ProjectCards
 
 class ProjectSerializer(ModelSerializer):
     class Meta:
@@ -9,4 +9,9 @@ class ProjectSerializer(ModelSerializer):
 class EmployeeSerializer(ModelSerializer):
     class Meta:
         model = Employee
+        fields ='__all__'
+    
+class CardSerializer(ModelSerializer):
+    class Meta:
+        model = ProjectCards
         fields ='__all__'

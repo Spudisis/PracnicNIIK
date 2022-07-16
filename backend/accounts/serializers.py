@@ -6,3 +6,8 @@ class UserCreateSerializer(UserCreateSerializer):
     class Meta(UserCreateSerializer.Meta):
         model=User
         fields =('id','email','phone','name','password')
+
+class UserSerializer(UserCreateSerializer):
+    class Meta(UserCreateSerializer.Meta):
+        model=User
+        fields =('id','email','phone','name','password','is_staff')
