@@ -1,6 +1,5 @@
 import s from "./authorization.module.css";
 import { useForm } from "react-hook-form";
-<<<<<<< HEAD
 import { NavLink,Link, Navigate } from "react-router-dom";
 import {useState} from "react";
 import {connect} from "react-redux";
@@ -21,20 +20,6 @@ const Authorization = ({login, isAuthenticated})=> {
     if (isAuthenticated){
       return <Navigate to="/" />;
     }
-  
-=======
-import { NavLink, Routes, Route } from "react-router-dom";
-import Changepass from "./change_pass/change_pass";
-function Authorization() {
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm();
-  const onSubmit = (data) => {
-    alert(JSON.stringify(data));
-  };
->>>>>>> 36fda3d0c287e943d21eebb22098620819610cfd
   return (
     <div className={s.wrapper}>
       <div className={s.auth}>
