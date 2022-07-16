@@ -53,8 +53,7 @@ function Table2() {
     let n = data.filter((item) => {
       return (
         item["name"].toLowerCase().includes(search.toLowerCase()) ||
-        item["discription"].toLowerCase().includes(search.toLowerCase()) ||
-        item["type"].toLowerCase().includes(search.toLowerCase())
+        item["discription"].toLowerCase().includes(search.toLowerCase())
       );
     });
     if (!search || n.length == 0) {

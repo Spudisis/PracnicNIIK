@@ -8,12 +8,11 @@ import Table2 from "./table2/table2.jsx";
 import Table3 from "./table3/table3.jsx";
 import Table4 from "./table4/table4";
 
-import { checkAthenticated ,load_user} from "../../auth.action";
-import {connect} from "react-redux"
+import { checkAthenticated, load_user } from "../../auth.action";
+import { connect } from "react-redux";
 
-
-const Profile=() =>{
-  if(localStorage.getItem('access')==null){
+const Profile = () => {
+  if (localStorage.getItem("access") == null) {
     return <Navigate to="/" />;
   }
   return (
@@ -54,7 +53,7 @@ const Profile=() =>{
           to="/profile/table4"
           className={({ isActive }) => (isActive ? s.activeLink : s.link)}
         >
-          таблица4
+          Аккаунты
         </NavLink>
       </nav>
       <section className={s.content}>
@@ -70,6 +69,6 @@ const Profile=() =>{
       </section>
     </div>
   );
-}
+};
 
-export default connect(null,{checkAthenticated,load_user})(Profile);
+export default connect(null, { checkAthenticated, load_user })(Profile);

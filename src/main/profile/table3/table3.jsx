@@ -54,11 +54,7 @@ function Table3() {
     let n = data.filter((item) => {
       return (
         item["pr_name"].toLowerCase().includes(search.toLowerCase()) ||
-        item["pr_stage"].toLowerCase().includes(search.toLowerCase()) ||
-        item["type"].toLowerCase().includes(search.toLowerCase()) ||
-        item["pr_price"].toLowerCase().includes(search.toLowerCase()) ||
         item["pr_discription"].toLowerCase().includes(search.toLowerCase()) ||
-        item["pr_type"].toLowerCase().includes(search.toLowerCase()) ||
         item["pr_emloyee"].toLowerCase().includes(search.toLowerCase()) ||
         item["pr_buyer"].toLowerCase().includes(search.toLowerCase())
       );
