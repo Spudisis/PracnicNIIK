@@ -56,8 +56,9 @@ function Table1() {
   const getFilteredData = () => {
     let n = data.filter((item) => {
       return (
-        item["em_fio"].toLowerCase().includes(search.toLowerCase()) ||
-        item["em_phone"].toLowerCase().includes(search.toLowerCase())
+        data
+        //item["em_fio"].toLowerCase().includes(search.toLowerCase()) ||
+        //item["em_phone"].toLowerCase().includes(search.toLowerCase())
       );
     });
     if (!search || n.length == 0) {
@@ -66,9 +67,16 @@ function Table1() {
     return n;
   };
   const onDelete = async (id) => {
-    await fetch(`http://127.0.0.1:8000/employee/${id}`, {
+    await fetch(`http://127.0.0.1:8000/employee/`, {
       method: "DELETE",
+      body: JSON.stringify({
+        id: id,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
     })
+
       .then((res) => {
         if (res.status !== 200) {
           return;
@@ -89,6 +97,8 @@ function Table1() {
     console.log(id);
     onDelete(id);
   };
+
+
   const onAdd = async (em_fio, em_phone) => {
     await fetch(`http://127.0.0.1:8000/employee/`, {
       method: "POST",
@@ -101,19 +111,18 @@ function Table1() {
       },
     })
       .then((res) => {
-        if (res.status !== 201) {
-          return;
-        } else {
+        console.log(res);
           return res.json();
-        }
       })
       .then((data) => {
-        setData((elem) => [...elem, data]);
+        console.log(data);
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
+
   const handleOnSubmitAdd = (e) => {
     e.preventDefault();
     onAdd(e.target.em_fio.value, e.target.em_phone.value);
