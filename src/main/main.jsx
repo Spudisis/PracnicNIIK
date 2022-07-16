@@ -1,6 +1,6 @@
 import Authorization from "./authorization/authorization";
 import s from "./main.module.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate} from "react-router-dom";
 import General from "./general/general";
 import Registration from "./registration/registration";
 import Changepass from "./authorization/change_pass/change_pass";

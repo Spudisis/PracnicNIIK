@@ -1,12 +1,20 @@
 import s from "./profile.module.css";
 import { NavLink } from "react-router-dom";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Orders from "./orders/orders";
 import Account from "./account/account";
 import Table1 from "./table1/table1.jsx";
 import Table2 from "./table2/table2.jsx";
 import Table3 from "./table3/table3.jsx";
-function Profile() {
+import { checkAthenticated ,load_user} from "../../auth.action";
+import {connect} from "react-redux"
+
+
+const Profile=() =>{
+  if(localStorage.getItem('access')==null){
+    return <Navigate to="/" />;
+  }
+
   return (
     <div className={s.wrapper}>
       <nav className={s.navBlock}>
@@ -62,4 +70,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default connect(null,{checkAthenticated,load_user})(Profile);
