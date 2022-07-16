@@ -51,7 +51,7 @@ def apiEmployee(request):
     elif request.method == 'POST':
         employee_data = JSONParser().parse(request)
         seralizer = EmployeeSerializer(data=employee_data)
-        if seralizer.is_valid():
+        if seralizer.is_valid(): 
             seralizer.save()
             return JsonResponse("Success",safe=False)
         return JsonResponse("Error",safe= False)
