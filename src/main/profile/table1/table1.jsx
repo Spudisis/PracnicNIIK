@@ -25,7 +25,7 @@ function Table1() {
 
   useEffect(() => {
     async function fetchData() {
-      let respons = await fetch("http://jsonplaceholder.typicode.com/todos/");
+      let respons = await fetch("http://127.0.0.1:8000/employee/");
       let data = await respons.json();
       setIsLoading(false);
       setData(data);
@@ -55,7 +55,10 @@ function Table1() {
   };
   const getFilteredData = () => {
     let n = data.filter((item) => {
-      return item["title"].toLowerCase().includes(search.toLowerCase());
+      return (
+        item["em_fio"].toLowerCase().includes(search.toLowerCase()) ||
+        item["em_phone"].toLowerCase().includes(search.toLowerCase())
+      );
     });
     if (!search || n.length == 0) {
       return data;
@@ -63,7 +66,7 @@ function Table1() {
     return n;
   };
   const onDelete = async (id) => {
-    await fetch(`http://jsonplaceholder.typicode.com/todos/${id}`, {
+    await fetch(`http://127.0.0.1:8000/employee/${id}`, {
       method: "DELETE",
     })
       .then((res) => {
@@ -86,14 +89,12 @@ function Table1() {
     console.log(id);
     onDelete(id);
   };
-  const onAdd = async (userId, title, completed) => {
-    await fetch(`http://jsonplaceholder.typicode.com/todos/`, {
+  const onAdd = async (em_fio, em_phone) => {
+    await fetch(`http://127.0.0.1:8000/employee/`, {
       method: "POST",
       body: JSON.stringify({
-        userId: userId,
-        id: "1",
-        title: title,
-        completed: completed,
+        em_fio: em_fio,
+        em_phone: em_phone,
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -115,16 +116,10 @@ function Table1() {
   };
   const handleOnSubmitAdd = (e) => {
     e.preventDefault();
-    onAdd(
-      e.target.userId.value,
+    onAdd(e.target.em_fio.value, e.target.em_phone.value);
+    e.target.em_fio.value = "";
 
-      e.target.title.value,
-      e.target.completed.value
-    );
-    e.target.userId.value = "";
-
-    e.target.title.value = "";
-    e.target.completed.value = "";
+    e.target.em_phone.value = "";
   };
 
   const filteredData = getFilteredData();
@@ -153,22 +148,19 @@ function Table1() {
         <div className={s.addStr}>
           <form onSubmit={handleOnSubmitAdd} className={s.formAddMain}>
             <input
-              type="number"
-              placeholder="userID"
-              name="userId"
+              type="text"
+              placeholder="ФИО"
+              name="em_fio"
               className={s.formAdd}
             />
 
             <input
-              type="text"
-              placeholder="title"
-              name="title"
+              type="number"
+              placeholder="Номер телефона"
+              name="em_phone"
               className={s.formAdd}
             />
-            <select name="completed" className={s.formAdd}>
-              <option value="false">false</option>
-              <option value="true">true</option>
-            </select>
+
             <button className={s.btn} onSubmit={handleOnSubmitAdd}>
               Добавить
             </button>
@@ -178,14 +170,13 @@ function Table1() {
         <div className={s.buttons}>
           <TableSearch onSearch={searchHandler} />
           <select
+            defaultValue="15"
             name="SelectCountRow"
             className={s.formAdd}
             onChange={(e) => setCountRow(e.target.value)}
           >
             <option value="10">10 строк</option>
-            <option value="15" selected>
-              15 строк
-            </option>
+            <option value="15">15 строк</option>
             <option value="20">20 строк</option>
             <option value="30">30 строк</option>
           </select>
