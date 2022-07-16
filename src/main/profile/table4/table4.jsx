@@ -7,7 +7,7 @@ import _, { clone, forEach } from "lodash";
 import ReactPaginate from "react-paginate";
 import TableSearch from "../adminPanel/TableSearch";
 
-function Table1() {
+function Table4() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [sort, setSort] = useState("asc");
@@ -21,7 +21,7 @@ function Table1() {
 
   useEffect(() => {
     async function fetchData() {
-      let respons = await fetch("http://127.0.0.1:8000/employee/");
+      let respons = await fetch("http://127.0.0.1:8000/client/");
       let data = await respons.json();
       setIsLoading(false);
       setData(data);
@@ -52,8 +52,9 @@ function Table1() {
   const getFilteredData = () => {
     let n = data.filter((item) => {
       return (
-        item["em_fio"].toLowerCase().includes(search.toLowerCase()) ||
-        item["em_phone"].toLowerCase().includes(search.toLowerCase())
+        item["email"].toLowerCase().includes(search.toLowerCase()) ||
+        item["phone"].toLowerCase().includes(search.toLowerCase()) ||
+        item["name"].toLowerCase().includes(search.toLowerCase())
       );
     });
     if (!search || n.length == 0) {
@@ -63,7 +64,7 @@ function Table1() {
   };
 
   const onDelete = async (id) => {
-    await fetch(`http://127.0.0.1:8000/employee/`, {
+    await fetch(`http://127.0.0.1:8000/client/`, {
       method: "DELETE",
       body: JSON.stringify({
         id: id,
@@ -93,40 +94,6 @@ function Table1() {
     onDelete(id);
   };
 
-  const onAdd = async (em_fio, em_phone) => {
-    await fetch(`http://127.0.0.1:8000/employee/`, {
-      method: "POST",
-      body: JSON.stringify({
-        em_fio: em_fio,
-        em_phone: em_phone,
-      }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    })
-      .then((res) => {
-        if (res.status !== 200) {
-          return;
-        } else {
-          return res.json();
-        }
-      })
-      .then(() => {
-        setUpd(new Date());
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const handleOnSubmitAdd = (e) => {
-    e.preventDefault();
-    onAdd(e.target.em_fio.value, e.target.em_phone.value);
-    e.target.em_fio.value = "";
-
-    e.target.em_phone.value = "";
-  };
-
   const filteredData = getFilteredData();
   const pageSize = countRow;
   const countPage = Math.ceil(filteredData.length / pageSize);
@@ -150,28 +117,6 @@ function Table1() {
         )}
       </div>
       <div className={s.func}>
-        <div className={s.addStr}>
-          <form onSubmit={handleOnSubmitAdd} className={s.formAddMain}>
-            <input
-              type="text"
-              placeholder="ФИО"
-              name="em_fio"
-              className={s.formAdd}
-            />
-
-            <input
-              type="number"
-              placeholder="Номер телефона"
-              name="em_phone"
-              className={s.formAdd}
-            />
-
-            <button className={s.btn} onSubmit={handleOnSubmitAdd}>
-              Добавить
-            </button>
-          </form>
-        </div>
-
         <div className={s.buttons}>
           <TableSearch onSearch={searchHandler} />
           <select
@@ -218,4 +163,4 @@ function Table1() {
   );
 }
 
-export default Table1;
+export default Table4;
