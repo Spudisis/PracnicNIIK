@@ -1,27 +1,25 @@
 import s from "./authorization.module.css";
 import { useForm } from "react-hook-form";
-import { NavLink, Link, Navigate } from "react-router-dom";
-import { useState } from "react";
-import { connect } from "react-redux";
-import { login } from "../../auth.action";
+import { NavLink,Link, Navigate } from "react-router-dom";
+import {useState} from "react";
+import {connect} from "react-redux";
+import {login} from '../../auth.action'
 
-const Authorization = ({ login, isAuthenticated }) => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-  const { email, password } = formData;
-  const onChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  const onSubmit = (e) => {
-    e.preventDefault();
-    login(email, password);
-  };
+const Authorization = ({login, isAuthenticated})=> {
+    const[formData, setFormData]=useState({
+      email: "",
+      password: ""
+    });
+    const {email, password} = formData;
+    const onChange = e => setFormData({... formData,[e.target.name]:e.target.value});
+    const onSubmit = e =>{
+      e.preventDefault();
+      login(email,password);
+    };
 
-  if (isAuthenticated) {
-    return <Navigate to="/" />;
-  }
-
+    if (isAuthenticated){
+      return <Navigate to="/" />;
+    }
   return (
     <div className={s.wrapper}>
       <div className={s.auth}>

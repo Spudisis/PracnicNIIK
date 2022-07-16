@@ -1,8 +1,4 @@
 import s from "../adminPanel/adminPanel.module.css";
-import jsonMas from "../adminPanel/jsonMas.json";
-import AdsSites from "../adminPanel/AdsSites_sample.json";
-import nbb from "../adminPanel/nbbb.json";
-import table4 from "../adminPanel/table4.json";
 import { React, useState, useEffect } from "react";
 import Loader from "../adminPanel/loader.jsx";
 import Table from "../adminPanel/table";
@@ -10,10 +6,8 @@ import DetailRowView from "../adminPanel/DetailRowView.jsx";
 import _, { clone, forEach } from "lodash";
 import ReactPaginate from "react-paginate";
 import TableSearch from "../adminPanel/TableSearch";
-import userEvent from "@testing-library/user-event";
 
-function Table1() {
-  const [ModeSelected, setModeSelected] = useState(false);
+function Table2() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [sort, setSort] = useState("asc");
@@ -22,18 +16,18 @@ function Table1() {
   const [row, setRow] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
   const [id, setId] = useState(null);
+  const [countRow, setCountRow] = useState(15);
+  const [upd, setUpd] = useState("");
 
   useEffect(() => {
     async function fetchData() {
-      let respons = await fetch(
-        "https://jsonplaceholder.typicode.com/comments/"
-      );
+      let respons = await fetch("http://127.0.0.1:8000/cards/");
       let data = await respons.json();
       setIsLoading(false);
       setData(data);
     }
     fetchData();
-  }, []);
+  }, [countRow, upd]);
 
   const onSort = (sortField) => {
     const clonedData = data.concat();
@@ -57,16 +51,27 @@ function Table1() {
   };
   const getFilteredData = () => {
     let n = data.filter((item) => {
-      return item["body"].toLowerCase().includes(search.toLowerCase());
+      return (
+        item["name"].toLowerCase().includes(search.toLowerCase()) ||
+        item["discription"].toLowerCase().includes(search.toLowerCase()) ||
+        item["type"].toLowerCase().includes(search.toLowerCase())
+      );
     });
     if (!search || n.length == 0) {
       return data;
     }
     return n;
   };
+
   const onDelete = async (id) => {
-    await fetch(`https://jsonplaceholder.typicode.com/comments/${id}`, {
+    await fetch(`http://127.0.0.1:8000/cards/`, {
       method: "DELETE",
+      body: JSON.stringify({
+        id: id,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
     })
       .then((res) => {
         if (res.status !== 200) {
@@ -88,46 +93,51 @@ function Table1() {
     console.log(id);
     onDelete(id);
   };
-  const onAdd = async (postId, id, name, email, body) => {
-    await fetch(`https://jsonplaceholder.typicode.com/comments`, {
+
+  const onAdd = async (name, discription, url, type) => {
+    await fetch(`http://127.0.0.1:8000/cards/`, {
       method: "POST",
       body: JSON.stringify({
-        postId: postId,
-        id: id,
         name: name,
-        email: email,
-        body: body,
+        discription: discription,
+        url: url,
+        type: type,
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
     })
       .then((res) => {
-        if (res.status !== 201) {
+        if (res.status !== 200) {
           return;
         } else {
           return res.json();
         }
       })
-      .then((data) => {
-        setData((elem) => [...elem, data]);
+      .then(() => {
+        setUpd(new Date());
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
   const handleOnSubmitAdd = (e) => {
     e.preventDefault();
     onAdd(
-      e.target.postId.value,
-      e.target.id.value,
       e.target.name.value,
-      e.target.email.value,
-      e.target.body.value
+      e.target.discription.value,
+      e.target.url.value,
+      e.target.type.value
     );
+    e.target.name.value = "";
+    e.target.discription.value = "";
+    e.target.url.value = "";
+    e.target.type.value = "";
   };
+
   const filteredData = getFilteredData();
-  const pageSize = 13;
+  const pageSize = countRow;
   const countPage = Math.ceil(filteredData.length / pageSize);
   const displayData = _.chunk(filteredData, pageSize)[currentPage];
 
@@ -150,14 +160,62 @@ function Table1() {
       </div>
       <div className={s.func}>
         <div className={s.addStr}>
-          <form onSubmit={handleOnSubmitAdd}>
-            <input type="text" placeholder="postId" name="postId" />
-            <input type="text" placeholder="id" name="id" />
-            <input type="text" placeholder="name" name="name" />
-            <input type="text" placeholder="email" name="email" />
-            <input type="text" placeholder="body" name="body" />
-            <button onSubmit={handleOnSubmitAdd}>Добавить</button>
+          <form onSubmit={handleOnSubmitAdd} className={s.formAddMain}>
+            <input
+              type="text"
+              placeholder="Название"
+              name="name"
+              className={s.formAdd}
+            />
+
+            <input
+              type="text"
+              placeholder="Описание"
+              name="discription"
+              className={s.formAdd}
+            />
+            <input
+              type="text"
+              placeholder="Картинка"
+              name="url"
+              className={s.formAdd}
+            />
+            <input
+              type="text"
+              placeholder="Тип товара"
+              name="type"
+              className={s.formAdd}
+            />
+
+            <button className={s.btn} onSubmit={handleOnSubmitAdd}>
+              Добавить
+            </button>
           </form>
+        </div>
+
+        <div className={s.buttons}>
+          <TableSearch onSearch={searchHandler} />
+          <select
+            defaultValue="15"
+            name="SelectCountRow"
+            className={s.formAdd}
+            onChange={(e) => setCountRow(e.target.value)}
+          >
+            <option value="10">10 строк</option>
+            <option value="15">15 строк</option>
+            <option value="20">20 строк</option>
+            <option value="30">30 строк</option>
+          </select>
+          <div>
+            <button onClick={handleDelete} className={s.btn}>
+              удалить
+            </button>
+            <input
+              type="text"
+              placeholder="Введите id для удаления"
+              onChange={(e) => setId(e.target.value)}
+            />
+          </div>
         </div>
         {data.length > pageSize ? (
           <ReactPaginate
@@ -175,24 +233,10 @@ function Table1() {
             forcePage={currentPage}
           />
         ) : null}
-
-        <div className={s.buttons}>
-          <TableSearch onSearch={searchHandler} />
-          <div>
-            <button onClick={handleDelete} className={s.btn}>
-              удалить
-            </button>
-            <input
-              type="text"
-              placeholder="Введите id для удаления"
-              onChange={(e) => setId(e.target.value)}
-            />
-          </div>
-        </div>
       </div>
       {row ? <DetailRowView person={row} data={data} /> : null}
     </div>
   );
 }
 
-export default Table1;
+export default Table2;

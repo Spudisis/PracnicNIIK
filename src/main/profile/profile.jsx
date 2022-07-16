@@ -6,6 +6,7 @@ import Account from "./account/account";
 import Table1 from "./table1/table1.jsx";
 import Table2 from "./table2/table2.jsx";
 import Table3 from "./table3/table3.jsx";
+import Table4 from "./table4/table4";
 function Profile() {
   return (
     <div className={s.wrapper}>
@@ -27,19 +28,19 @@ function Profile() {
           to="/profile/table1"
           className={({ isActive }) => (isActive ? s.activeLink : s.link)}
         >
-          таблица1
+          Менеджеры
         </NavLink>
         <NavLink
           to="/profile/table2"
           className={({ isActive }) => (isActive ? s.activeLink : s.link)}
         >
-          таблица2
+          Товары
         </NavLink>
         <NavLink
           to="/profile/table3"
           className={({ isActive }) => (isActive ? s.activeLink : s.link)}
         >
-          таблица3
+          Заказы
         </NavLink>
         <NavLink
           to="/profile/table4"
@@ -56,6 +57,7 @@ function Profile() {
           <Route path="/table1" element={<Table1 />}></Route>
           <Route path="/table2" element={<Table2 />}></Route>
           <Route path="/table3" element={<Table3 />}></Route>
+          <Route path="/table4" element={<Table4 />}></Route>
         </Routes>
       </section>
     </div>
