@@ -2,7 +2,7 @@ import s from "../adminPanel/adminPanel.module.css";
 import { React, useState, useEffect } from "react";
 import Loader from "../adminPanel/loader.jsx";
 import Table from "../adminPanel/table";
-import DetailRowView from "../adminPanel/DetailRowView.jsx";
+
 import _, { clone, forEach } from "lodash";
 import ReactPaginate from "react-paginate";
 import TableSearch from "../adminPanel/TableSearch";
@@ -158,7 +158,7 @@ function Table4() {
           />
         ) : null}
       </div>
-      {row ? <DetailRowView person={row} data={data} /> : null}
+      
     </div>
   );
 }

@@ -2,7 +2,6 @@ import s from "../adminPanel/adminPanel.module.css";
 import { React, useState, useEffect } from "react";
 import Loader from "../adminPanel/loader.jsx";
 import Table from "../adminPanel/table";
-import DetailRowView from "../adminPanel/DetailRowView.jsx";
 import _, { clone, forEach } from "lodash";
 import ReactPaginate from "react-paginate";
 import TableSearch from "../adminPanel/TableSearch";
@@ -134,7 +133,46 @@ function Table2() {
     e.target.url.value = "";
     e.target.type.value = "";
   };
+  const onPut = async (id, name, discription, url, type) => {
+    await fetch(`http://127.0.0.1:8000/cards/`, {
+      method: "PUT",
+      body: JSON.stringify({
+        id: id,
+        name: name,
+        discription: discription,
+        url: url,
+        type: type,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((res) => {
+        if (res.status !== 200) {
+          return;
+        } else {
+          return res.json();
+        }
+      })
+      .then(() => {
+        setUpd(new Date());
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
+  const handleOnSubmitPut = (e) => {
+    e.preventDefault();
+    onPut(
+      e.target.idPut.value,
+      e.target.namePut.value,
+      e.target.discriptionPut.value,
+      e.target.urlPut.value,
+      e.target.typePut.value
+    );
+    setRow("");
+  };
   const filteredData = getFilteredData();
   const pageSize = countRow;
   const countPage = Math.ceil(filteredData.length / pageSize);
@@ -233,7 +271,44 @@ function Table2() {
           />
         ) : null}
       </div>
-      {row ? <DetailRowView person={row} data={data} /> : null}
+      {row ? (
+        <div>
+          <form onSubmit={handleOnSubmitPut}>
+            <input
+              type="number"
+              value={row["id"]}
+              readOnly
+              name="idPut"
+              placeholder="ID"
+            />
+            <input
+              type="text"
+              defaultValue={row["name"]}
+              name="namePut"
+              placeholder="Название"
+            />
+            <input
+              type="text"
+              defaultValue={row["discription"]}
+              name="discriptionPut"
+              placeholder="Описание"
+            />
+            <input
+              type="text"
+              defaultValue={row["url"]}
+              name="urlPut"
+              placeholder="Картинка"
+            />
+            <input
+              type="number"
+              defaultValue={row["type"]}
+              name="typePut"
+              placeholder="тип"
+            />
+            <button onSubmit={handleOnSubmitPut}>Изменить</button>
+          </form>
+        </div>
+      ) : null}
     </div>
   );
 }
