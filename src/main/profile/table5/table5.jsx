@@ -20,7 +20,7 @@ function Table5() {
 
   useEffect(() => {
     async function fetchData() {
-      let respons = await fetch("http://127.0.0.1:8000/employee/");
+      let respons = await fetch("http://127.0.0.1:8000/call/");
       let data = await respons.json();
       setIsLoading(false);
       setData(data);
@@ -51,8 +51,8 @@ function Table5() {
   const getFilteredData = () => {
     let n = data.filter((item) => {
       return (
-        item["em_fio"].toLowerCase().includes(search.toLowerCase()) ||
-        item["em_phone"].toLowerCase().includes(search.toLowerCase())
+        item["name"].toLowerCase().includes(search.toLowerCase()) ||
+        item["project"].toLowerCase().includes(search.toLowerCase())
       );
     });
     if (!search || n.length == 0) {
@@ -62,7 +62,7 @@ function Table5() {
   };
 
   const onDelete = async (id) => {
-    await fetch(`http://127.0.0.1:8000/employee/`, {
+    await fetch(`http://127.0.0.1:8000/call/`, {
       method: "DELETE",
       body: JSON.stringify({
         id: id,
@@ -92,12 +92,14 @@ function Table5() {
     onDelete(id);
   };
 
-  const onAdd = async (em_fio, em_phone) => {
-    await fetch(`http://127.0.0.1:8000/employee/`, {
+  const onAdd = async (number, name, state, project) => {
+    await fetch(`http://127.0.0.1:8000/call/`, {
       method: "POST",
       body: JSON.stringify({
-        em_fio: em_fio,
-        em_phone: em_phone,
+        number: number,
+        name: name,
+        state: state,
+        project: project,
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -120,18 +122,27 @@ function Table5() {
 
   const handleOnSubmitAdd = (e) => {
     e.preventDefault();
-    onAdd(e.target.em_fio.value, e.target.em_phone.value);
-    e.target.em_fio.value = "";
+    onAdd(
+      e.target.idAdd.value,
+      e.target.numberAdd.value,
+      e.target.stateAdd.value,
+      e.target.projectAdd.value
+    );
+    e.target.idAdd.value = "";
 
-    e.target.em_phone.value = "";
+    e.target.numberAdd.value = "";
+    e.target.stateAdd.value = "";
+    e.target.projectAdd.value = "";
   };
-  const onPut = async (id, em_fio, em_phone) => {
+  const onPut = async (id, number, name, state, project) => {
     await fetch(`http://127.0.0.1:8000/employee/`, {
       method: "PUT",
       body: JSON.stringify({
         id: id,
-        em_fio: em_fio,
-        em_phone: em_phone,
+        number: number,
+        name: name,
+        state: state,
+        project: project,
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -156,8 +167,10 @@ function Table5() {
     e.preventDefault();
     onPut(
       e.target.idPut.value,
-      e.target.fioPut.value,
-      e.target.numberPut.value
+      e.target.numberPut.value,
+      e.target.namePut.value,
+      e.target.statePut.value,
+      e.target.projectPut.value
     );
     setRow("");
   };
@@ -188,18 +201,13 @@ function Table5() {
         <div className={s.addStr}>
           <form onSubmit={handleOnSubmitAdd} className={s.formAddMain}>
             <input
-              type="text"
-              placeholder="ФИО"
-              name="em_fio"
-              className={s.formAdd}
-            />
-
-            <input
               type="number"
+              name="numberAdd"
               placeholder="Номер телефона"
-              name="em_phone"
-              className={s.formAdd}
             />
+            <input type="text" name="nameAdd" placeholder="Имя" />
+            <input type="number" name="stateAdd" placeholder="Состояние" />
+            <input type="number" name="projectAdd" placeholder="Проект" />
 
             <button className={s.btn} onSubmit={handleOnSubmitAdd}>
               Добавить
@@ -260,25 +268,25 @@ function Table5() {
             />
             <input
               type="number"
-              defaultValue={row["em_fio"]}
+              defaultValue={row["number"]}
               name="numberPut"
               placeholder="Номер телефона"
             />
             <input
               type="text"
-              defaultValue={row["em_phone"]}
+              defaultValue={row["name"]}
               name="namePut"
               placeholder="Имя"
             />
             <input
               type="number"
-              defaultValue={row["em_phone"]}
+              defaultValue={row["state"]}
               name="statePut"
               placeholder="Состояние"
             />
             <input
               type="number"
-              defaultValue={row["em_phone"]}
+              defaultValue={row["project"]}
               name="projectPut"
               placeholder="Проект"
             />
