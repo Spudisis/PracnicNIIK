@@ -2,7 +2,7 @@ import s from "../adminPanel/adminPanel.module.css";
 import { React, useState, useEffect } from "react";
 import Loader from "../adminPanel/loader.jsx";
 import Table from "../adminPanel/table";
-import DetailRowView from "../adminPanel/DetailRowView.jsx";
+
 import _, { clone, forEach } from "lodash";
 import ReactPaginate from "react-paginate";
 import TableSearch from "../adminPanel/TableSearch";
@@ -54,13 +54,7 @@ function Table3() {
     let n = data.filter((item) => {
       return (
         item["pr_name"].toLowerCase().includes(search.toLowerCase()) ||
-        item["pr_stage"].toLowerCase().includes(search.toLowerCase()) ||
-        item["type"].toLowerCase().includes(search.toLowerCase()) ||
-        item["pr_price"].toLowerCase().includes(search.toLowerCase()) ||
-        item["pr_discription"].toLowerCase().includes(search.toLowerCase()) ||
-        item["pr_type"].toLowerCase().includes(search.toLowerCase()) ||
-        item["pr_emloyee"].toLowerCase().includes(search.toLowerCase()) ||
-        item["pr_buyer"].toLowerCase().includes(search.toLowerCase())
+        item["pr_discription"].toLowerCase().includes(search.toLowerCase())
       );
     });
     if (!search || n.length == 0) {
@@ -166,7 +160,79 @@ function Table3() {
     e.target.pr_emloyee.value = "";
     e.target.pr_buyer.value = "";
   };
+  const onPut = async (
+    id,
+    pr_name,
+    pr_start,
+    pr_end,
+    pr_stage,
+    pr_price,
+    pr_discription,
+    pr_type,
+    pr_emloyee,
+    pr_buyer
+  ) => {
+    await fetch(`http://127.0.0.1:8000/project/`, {
+      method: "PUT",
+      body: JSON.stringify({
+        id: id,
+        pr_name: pr_name,
+        pr_start: pr_start,
+        pr_end: pr_end,
+        pr_stage: pr_stage,
+        pr_price: pr_price,
+        pr_discription: pr_discription,
+        pr_type: pr_type,
+        pr_emloyee: pr_emloyee,
+        pr_buyer: pr_buyer,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((res) => {
+        if (res.status !== 200) {
+          return;
+        } else {
+          return res.json();
+        }
+      })
+      .then(() => {
+        setUpd(new Date());
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
+  const handleOnSubmitPut = (e) => {
+    e.preventDefault();
+    console.log(
+      e.target.idPut.value,
+      e.target.pr_namePut.value,
+      e.target.pr_startPut.value,
+      e.target.pr_endPut.value,
+      e.target.pr_stagePut.value,
+      e.target.pr_pricePut.value,
+      e.target.pr_discriptionPut.value,
+      e.target.pr_typePut.value,
+      e.target.pr_emloyeePut.value,
+      e.target.pr_buyerPut.value
+    );
+    onPut(
+      e.target.idPut.value,
+      e.target.pr_namePut.value,
+      e.target.pr_startPut.value,
+      e.target.pr_endPut.value,
+      e.target.pr_stagePut.value,
+      e.target.pr_pricePut.value,
+      e.target.pr_discriptionPut.value,
+      e.target.pr_typePut.value,
+      e.target.pr_emloyeePut.value,
+      e.target.pr_buyerPut.value
+    );
+    setData("");
+  };
   const filteredData = getFilteredData();
   const pageSize = countRow;
   const countPage = Math.ceil(filteredData.length / pageSize);
@@ -294,7 +360,75 @@ function Table3() {
           />
         ) : null}
       </div>
-      {row ? <DetailRowView person={row} data={data} /> : null}
+      {row ? (
+        <form onSubmit={handleOnSubmitPut}>
+          <input
+            type="number"
+            readOnly
+            placeholder="Название"
+            name="idPut"
+            defaultValue={row.id}
+          />
+          <input
+            type="text"
+            placeholder="Название"
+            name="pr_namePut"
+            defaultValue={row.pr_name}
+          />
+          <input
+            type="date"
+            placeholder="Старт"
+            name="pr_startPut"
+            defaultValue={row.pr_start}
+          />
+          <input
+            type="date"
+            placeholder="Конец"
+            name="pr_endPut"
+            defaultValue={row.pr_end}
+          />
+          <input
+            type="text"
+            placeholder="Состояние"
+            name="pr_stagePut"
+            defaultValue={row.pr_stage}
+          />
+          <input
+            type="number"
+            placeholder="Цена"
+            name="pr_pricePut"
+            defaultValue={row.pr_price}
+          />
+          <input
+            type="text"
+            placeholder="Описание"
+            name="pr_discriptionPut"
+            defaultValue={row.pr_discription}
+          />
+          <input
+            type="number"
+            placeholder="Тип"
+            name="pr_typePut"
+            defaultValue={row.pr_type}
+          />
+          <input
+            type="text"
+            placeholder="Менеджер"
+            name="pr_emloyeePut"
+            defaultValue={row.pr_emloyee}
+          />
+          <input
+            type="text"
+            placeholder="Покупатель"
+            name="pr_buyerPut"
+            defaultValue={row.pr_buyer}
+          />
+
+          <button className={s.btn} onSubmit={handleOnSubmitPut}>
+            Изменить
+          </button>
+        </form>
+      ) : null}
     </div>
   );
 }
