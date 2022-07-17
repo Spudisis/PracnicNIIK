@@ -206,8 +206,8 @@ function Table5() {
               placeholder="Номер телефона"
             />
             <input type="text" name="nameAdd" placeholder="Имя" />
-            <input type="number" name="stateAdd" placeholder="Состояние" />
-            <input type="number" name="projectAdd" placeholder="Проект" />
+            <input type="text" name="stateAdd" placeholder="Состояние" />
+            <input type="text" name="projectAdd" placeholder="Проект" />
 
             <button className={s.btn} onSubmit={handleOnSubmitAdd}>
               Добавить
@@ -279,13 +279,13 @@ function Table5() {
               placeholder="Имя"
             />
             <input
-              type="number"
+              type="text"
               defaultValue={row["state"]}
               name="statePut"
               placeholder="Состояние"
             />
             <input
-              type="number"
+              type="text"
               defaultValue={row["project"]}
               name="projectPut"
               placeholder="Проект"
