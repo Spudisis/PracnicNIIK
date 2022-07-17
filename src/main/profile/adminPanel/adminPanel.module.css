@@ -146,3 +146,19 @@
   font-size: 20px;
   border-radius: 10px;
 }
+.formPut {
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(49, 16, 183);
+}
+.formPut input {
+  margin: 10px 0px;
+  height: 30px;
+  min-width: 100px;
+}
+.formPut select {
+  margin: 10px 0px;
+  height: 30px;
+  min-width: 100px;
+}

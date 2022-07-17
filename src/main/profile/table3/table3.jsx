@@ -219,7 +219,7 @@ function Table3() {
       e.target.pr_emloyeePut.value,
       e.target.pr_buyerPut.value
     );
-    setData("");
+    setRow("");
   };
   const filteredData = getFilteredData();
   const pageSize = countRow;
@@ -353,11 +353,11 @@ function Table3() {
         ) : null}
       </div>
       {row ? (
-        <form onSubmit={handleOnSubmitPut}>
+        <form onSubmit={handleOnSubmitPut} className={s.formPut}>
           <input
             type="number"
             readOnly
-            placeholder="Название"
+            placeholder="id"
             name="idPut"
             defaultValue={row.id}
           />
@@ -385,6 +385,7 @@ function Table3() {
             name="pr_stagePut"
             defaultValue={row.pr_stage}
           />
+
           <input
             type="number"
             placeholder="Цена"
@@ -397,20 +398,23 @@ function Table3() {
             name="pr_discriptionPut"
             defaultValue={row.pr_discription}
           />
+          <select name="pr_typePut">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+          </select>
           <input
             type="number"
-            placeholder="Тип"
-            name="pr_typePut"
-            defaultValue={row.pr_type}
-          />
-          <input
-            type="text"
             placeholder="Менеджер"
             name="pr_emloyeePut"
             defaultValue={row.pr_emloyee}
           />
           <input
-            type="text"
+            type="number"
             placeholder="Покупатель"
             name="pr_buyerPut"
             defaultValue={row.pr_buyer}

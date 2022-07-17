@@ -3,32 +3,33 @@ import { useForm } from "react-hook-form";
 import { signup } from "../../auth.action";
 import { connect } from "react-redux";
 import { useState } from "react";
-import { NavLink,Link, Navigate } from "react-router-dom";
+import { NavLink, Link, Navigate } from "react-router-dom";
 import { map } from "jquery";
 
-const Registration=({signup,isAuthenticated}) =>{
-  const [accountCreated,setAccountCreated]=useState(false);
-  const[formData, setFormData]=useState({
+const Registration = ({ signup, isAuthenticated }) => {
+  const [accountCreated, setAccountCreated] = useState(false);
+  const [formData, setFormData] = useState({
     name: "",
     phone: "",
     email: "",
     password: "",
-    re_password:""
+    re_password: "",
   });
-  const {email,name, phone,re_password,password} = formData;
-  const onChange = e => setFormData({... formData,[e.target.name]:e.target.value});
-  const onSubmit = e =>{
+  const { email, name, phone, re_password, password } = formData;
+  const onChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const onSubmit = (e) => {
     e.preventDefault();
-    if (password === re_password){
-      signup(name,email, phone,password,re_password);
+    if (password === re_password) {
+      signup(name, email, phone, password, re_password);
       setAccountCreated(true);
     }
   };
 
-  if (isAuthenticated){
+  if (isAuthenticated) {
     return <Navigate to="/" />;
   }
-  if (accountCreated){
+  if (accountCreated) {
     return <Navigate to="/" />;
   }
   return (
@@ -36,7 +37,7 @@ const Registration=({signup,isAuthenticated}) =>{
       <div className={s.auth}>
         <img src="./img/loginImg.png" alt="niik" />
         <h3>Регистрация</h3>
-        <form onSubmit={e=>onSubmit(e)} className={s.form}>
+        <form onSubmit={(e) => onSubmit(e)} className={s.form}>
           <div className={s.block}>
             <label className={s.text_field__label} htmlFor="email">
               E-mail
@@ -51,7 +52,7 @@ const Registration=({signup,isAuthenticated}) =>{
                 id="email"
                 value={email}
                 placeholder="Email"
-                onChange={e=>onChange(e)}
+                onChange={(e) => onChange(e)}
                 required
               />
             </div>
@@ -70,7 +71,7 @@ const Registration=({signup,isAuthenticated}) =>{
                 id="name"
                 value={name}
                 placeholder="ФИО"
-                onChange={e=>onChange(e)}
+                onChange={(e) => onChange(e)}
                 required
               />
             </div>
@@ -87,7 +88,7 @@ const Registration=({signup,isAuthenticated}) =>{
                 id="phone"
                 value={phone}
                 placeholder="Номер телефона"
-                onChange={e=>onChange(e)}
+                onChange={(e) => onChange(e)}
                 required
               />
             </div>
@@ -104,10 +105,10 @@ const Registration=({signup,isAuthenticated}) =>{
                 type="password"
                 name="password"
                 id="password"
-                value={password}
+                value={String(password)}
                 placeholder="Password"
-                onChange={e=>onChange(e)}
-                minLength='6'
+                onChange={(e) => onChange(e)}
+                minLength="6"
                 required
               />
             </div>
@@ -124,10 +125,10 @@ const Registration=({signup,isAuthenticated}) =>{
                 type="password"
                 name="re_password"
                 id="re_password"
-                value={re_password}
+                value={String(re_password)}
                 placeholder="Password repeat"
-                onChange={e=>onChange(e)}
-                minLength='6'
+                onChange={(e) => onChange(e)}
+                minLength="6"
                 required
               />
             </div>
@@ -144,8 +145,8 @@ const Registration=({signup,isAuthenticated}) =>{
       </div>
     </div>
   );
-}
-const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+};
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
 });
-export default connect(mapStateToProps,{signup})(Registration);
+export default connect(mapStateToProps, { signup })(Registration);

@@ -47,7 +47,7 @@ function Table(props) {
     await addFuncCol();
     await dataTableRender();
     await dataTableRowFunc();
-  }, 300);
+  }, 100);
 
   return (
     <table className={s.table_dark}>

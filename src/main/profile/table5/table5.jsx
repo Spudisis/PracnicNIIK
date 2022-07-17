@@ -6,7 +6,7 @@ import _, { clone, forEach } from "lodash";
 import ReactPaginate from "react-paginate";
 import TableSearch from "../adminPanel/TableSearch";
 
-function Table2() {
+function Table5() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [sort, setSort] = useState("asc");
@@ -20,7 +20,7 @@ function Table2() {
 
   useEffect(() => {
     async function fetchData() {
-      let respons = await fetch("http://127.0.0.1:8000/cards/");
+      let respons = await fetch("http://127.0.0.1:8000/employee/");
       let data = await respons.json();
       setIsLoading(false);
       setData(data);
@@ -51,8 +51,8 @@ function Table2() {
   const getFilteredData = () => {
     let n = data.filter((item) => {
       return (
-        item["name"].toLowerCase().includes(search.toLowerCase()) ||
-        item["discription"].toLowerCase().includes(search.toLowerCase())
+        item["em_fio"].toLowerCase().includes(search.toLowerCase()) ||
+        item["em_phone"].toLowerCase().includes(search.toLowerCase())
       );
     });
     if (!search || n.length == 0) {
@@ -62,7 +62,7 @@ function Table2() {
   };
 
   const onDelete = async (id) => {
-    await fetch(`http://127.0.0.1:8000/cards/`, {
+    await fetch(`http://127.0.0.1:8000/employee/`, {
       method: "DELETE",
       body: JSON.stringify({
         id: id,
@@ -92,14 +92,12 @@ function Table2() {
     onDelete(id);
   };
 
-  const onAdd = async (name, discription, url, type) => {
-    await fetch(`http://127.0.0.1:8000/cards/`, {
+  const onAdd = async (em_fio, em_phone) => {
+    await fetch(`http://127.0.0.1:8000/employee/`, {
       method: "POST",
       body: JSON.stringify({
-        name: name,
-        discription: discription,
-        url: url,
-        type: type,
+        em_fio: em_fio,
+        em_phone: em_phone,
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -122,26 +120,18 @@ function Table2() {
 
   const handleOnSubmitAdd = (e) => {
     e.preventDefault();
-    onAdd(
-      e.target.name.value,
-      e.target.discription.value,
-      e.target.url.value,
-      e.target.type.value
-    );
-    e.target.name.value = "";
-    e.target.discription.value = "";
-    e.target.url.value = "";
-    e.target.type.value = "";
+    onAdd(e.target.em_fio.value, e.target.em_phone.value);
+    e.target.em_fio.value = "";
+
+    e.target.em_phone.value = "";
   };
-  const onPut = async (id, name, discription, url, type) => {
-    await fetch(`http://127.0.0.1:8000/cards/`, {
+  const onPut = async (id, em_fio, em_phone) => {
+    await fetch(`http://127.0.0.1:8000/employee/`, {
       method: "PUT",
       body: JSON.stringify({
         id: id,
-        name: name,
-        discription: discription,
-        url: url,
-        type: type,
+        em_fio: em_fio,
+        em_phone: em_phone,
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -166,13 +156,12 @@ function Table2() {
     e.preventDefault();
     onPut(
       e.target.idPut.value,
-      e.target.namePut.value,
-      e.target.discriptionPut.value,
-      e.target.urlPut.value,
-      e.target.typePut.value
+      e.target.fioPut.value,
+      e.target.numberPut.value
     );
     setRow("");
   };
+
   const filteredData = getFilteredData();
   const pageSize = countRow;
   const countPage = Math.ceil(filteredData.length / pageSize);
@@ -200,32 +189,18 @@ function Table2() {
           <form onSubmit={handleOnSubmitAdd} className={s.formAddMain}>
             <input
               type="text"
-              placeholder="Название"
-              name="name"
-              className={s.formAdd}
-            />
-            <input
-              type="text"
-              placeholder="Описание"
-              name="discription"
-              className={s.formAdd}
-            />
-            <input
-              type="text"
-              placeholder="Картинка"
-              name="url"
+              placeholder="ФИО"
+              name="em_fio"
               className={s.formAdd}
             />
 
-            <select name="type" className={s.formAdd}>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-            </select>
+            <input
+              type="number"
+              placeholder="Номер телефона"
+              name="em_phone"
+              className={s.formAdd}
+            />
+
             <button className={s.btn} onSubmit={handleOnSubmitAdd}>
               Добавить
             </button>
@@ -275,38 +250,37 @@ function Table2() {
       </div>
       {row ? (
         <div>
-          <form onSubmit={handleOnSubmitPut} className={s.formPut}>
+          <form onSubmit={handleOnSubmitPut}>
             <input
               type="number"
-              value={row["id"]}
+              Value={row["id"]}
               readOnly
               name="idPut"
-              placeholder="ID"
+              placeholder="id"
             />
-            <input
-              type="text"
-              defaultValue={row["name"]}
-              name="namePut"
-              placeholder="Название"
-            />
-            <input
-              type="text"
-              defaultValue={row["discription"]}
-              name="discriptionPut"
-              placeholder="Описание"
-            />
-            <input
-              type="text"
-              defaultValue={row["url"]}
-              name="urlPut"
-              placeholder="Картинка"
-            />
-
             <input
               type="number"
-              defaultValue={row["type"]}
-              name="typePut"
-              placeholder="тип"
+              defaultValue={row["em_fio"]}
+              name="numberPut"
+              placeholder="Номер телефона"
+            />
+            <input
+              type="text"
+              defaultValue={row["em_phone"]}
+              name="namePut"
+              placeholder="Имя"
+            />
+            <input
+              type="number"
+              defaultValue={row["em_phone"]}
+              name="statePut"
+              placeholder="Состояние"
+            />
+            <input
+              type="number"
+              defaultValue={row["em_phone"]}
+              name="projectPut"
+              placeholder="Проект"
             />
             <button onSubmit={handleOnSubmitPut}>Изменить</button>
           </form>
@@ -316,4 +290,4 @@ function Table2() {
   );
 }
 
-export default Table2;
+export default Table5;

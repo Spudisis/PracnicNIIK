@@ -250,7 +250,7 @@ function Table1() {
       </div>
       {row ? (
         <div>
-          <form onSubmit={handleOnSubmitPut}>
+          <form onSubmit={handleOnSubmitPut} className={s.formPut}>
             <input
               type="number"
               Value={row["id"]}
