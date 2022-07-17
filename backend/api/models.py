@@ -23,7 +23,7 @@ class ProjectCards(models.Model):
     type = models.PositiveIntegerField(default=1)
 
 class Call(models.Model):
-    number = models.PositiveIntegerField( blank=True)
+    number = models.CharField( max_length=30,blank=True)
     name = models.CharField(max_length=255, blank=True)
     state = models.BooleanField(default=False)
     project = models.CharField(max_length = 50, blank=True)

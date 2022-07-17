@@ -17,7 +17,6 @@ function Orders() {
       body: JSON.stringify({
         number: number,
         name: name,
-        state: "false",
         project: project,
       }),
       headers: {
