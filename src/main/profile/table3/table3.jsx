@@ -207,18 +207,6 @@ function Table3() {
 
   const handleOnSubmitPut = (e) => {
     e.preventDefault();
-    console.log(
-      e.target.idPut.value,
-      e.target.pr_namePut.value,
-      e.target.pr_startPut.value,
-      e.target.pr_endPut.value,
-      e.target.pr_stagePut.value,
-      e.target.pr_pricePut.value,
-      e.target.pr_discriptionPut.value,
-      e.target.pr_typePut.value,
-      e.target.pr_emloyeePut.value,
-      e.target.pr_buyerPut.value
-    );
     onPut(
       e.target.idPut.value,
       e.target.pr_namePut.value,
@@ -276,12 +264,13 @@ function Table3() {
               name="pr_end"
               className={s.formAdd}
             />
-            <input
-              type="text"
-              placeholder="Состояние"
-              name="pr_stage"
-              className={s.formAdd}
-            />
+            <select name="pr_stage" className={s.formAdd}>
+              <option value="Подготовка">Подготовка</option>
+              <option value="Разработка">Разработка</option>
+              <option value="Исполнение">Исполнение</option>
+              <option value="Закончено">Закончено</option>
+            </select>
+
             <input
               type="number"
               placeholder="Цена"
@@ -294,20 +283,23 @@ function Table3() {
               name="pr_discription"
               className={s.formAdd}
             />
+            <select name="pr_type" className={s.formAdd}>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+            </select>
             <input
               type="number"
-              placeholder="Тип"
-              name="pr_type"
-              className={s.formAdd}
-            />
-            <input
-              type="text"
               placeholder="Менеджер"
               name="pr_emloyee"
               className={s.formAdd}
             />
             <input
-              type="text"
+              type="number"
               placeholder="Покупатель"
               name="pr_buyer"
               className={s.formAdd}

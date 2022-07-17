@@ -14,8 +14,8 @@ function Orders() {
 
   return (
     <div className={s.wrapper}>
-      {data.map((element) => (
-        <div className={s.projCard}>
+      {data.map((element, id) => (
+        <div className={s.projCard} key={id}>
           <img src={element["url"]} alt="img" className={s.imgProjCard} />
           <div className={s.nameProjCard}>{element["name"]}</div>
           <div className={s.textProjCard}>{element["discription"]}</div>

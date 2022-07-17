@@ -204,7 +204,6 @@ function Table2() {
               name="name"
               className={s.formAdd}
             />
-
             <input
               type="text"
               placeholder="Описание"
@@ -217,13 +216,16 @@ function Table2() {
               name="url"
               className={s.formAdd}
             />
-            <input
-              type="text"
-              placeholder="Тип товара"
-              name="type"
-              className={s.formAdd}
-            />
 
+            <select name="type" className={s.formAdd}>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+            </select>
             <button className={s.btn} onSubmit={handleOnSubmitAdd}>
               Добавить
             </button>
@@ -299,6 +301,7 @@ function Table2() {
               name="urlPut"
               placeholder="Картинка"
             />
+
             <input
               type="number"
               defaultValue={row["type"]}
