@@ -12,28 +12,28 @@ function Orders() {
     fetchData();
   }, []);
   const addCall = async (project, name, number) => {
-    // await fetch(`http://127.0.0.1:8000/call/`, {
-    //   method: "POST",
-    //   body: JSON.stringify({
-    //     number: number,
-    //     name: name,
-    //     state: "В ожидании звонка",
-    //     project: project,
-    //   }),
-    //   headers: {
-    //     "Content-type": "application/json; charset=UTF-8",
-    //   },
-    // })
-    //   .then((res) => {
-    //     if (res.status !== 200) {
-    //       return;
-    //     } else {
-    //       return res.json();
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    await fetch(`http://127.0.0.1:8000/call/`, {
+      method: "POST",
+      body: JSON.stringify({
+        number: number,
+        name: name,
+        state: "false",
+        project: project,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((res) => {
+        if (res.status !== 200) {
+          return;
+        } else {
+          return res.json();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <div className={s.wrapper}>
