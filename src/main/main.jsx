@@ -1,6 +1,6 @@
 import Authorization from "./authorization/authorization";
 import s from "./main.module.css";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate} from "react-router-dom";
 import General from "./general/general";
 import Registration from "./registration/registration";
 import Changepass from "./authorization/change_pass/change_pass";
@@ -32,7 +32,7 @@ function Main() {
           <Route path="/" element={<PageMain />} />
           <Route
             path="/authorization/change_password_confirm/:uid/:token"
-            element={<ConfirmPassword />}
+            element={<ConfirmPassword/>}
           />
           <Route path="/activation/:uid/:token" element={<Activation />} />
         </Routes>
