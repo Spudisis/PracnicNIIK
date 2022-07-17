@@ -36,3 +36,7 @@
 .link:hover {
   background-color: rgb(16, 42, 104);
 }
+.Navlist{
+  display: flex;
+  flex-direction:column ;
+}

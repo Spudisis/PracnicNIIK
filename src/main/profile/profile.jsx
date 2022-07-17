@@ -12,9 +12,11 @@ import { checkAthenticated, load_user } from "../../auth.action";
 import { connect } from "react-redux";
 
 const Profile = () => {
+  const a = localStorage.getItem('is_staff')
   if (localStorage.getItem("access") == null) {
     return <Navigate to="/" />;
   }
+
   return (
     <div className={s.wrapper}>
       <nav className={s.navBlock}>
@@ -30,7 +32,10 @@ const Profile = () => {
         >
           Проекты
         </NavLink>
-
+        {
+        (a)?
+        (
+          <div className={s.Navlist}>
         <NavLink
           to="/profile/table1"
           className={({ isActive }) => (isActive ? s.activeLink : s.link)}
@@ -55,12 +60,13 @@ const Profile = () => {
         >
           Аккаунты
         </NavLink>
+        </div>
+        ): null}
       </nav>
       <section className={s.content}>
         <Routes>
           <Route path="/account" element={<Account />}></Route>
           <Route path="/orders" element={<Orders />}></Route>
-
           <Route path="/table1" element={<Table1 />}></Route>
           <Route path="/table2" element={<Table2 />}></Route>
           <Route path="/table3" element={<Table3 />}></Route>

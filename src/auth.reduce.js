@@ -44,7 +44,11 @@ import{
                     isAuthenticated:false
                 }
             case USER_LOADED_SUCCESS:
-    
+                localStorage.setItem('name',payload.name);
+                localStorage.setItem('phone',payload.phone);
+                localStorage.setItem('email',payload.email)
+                localStorage.setItem('id',payload.id)
+                localStorage.setItem('is_staff',payload.is_staff)
                 return{
                     ...state,
                     user:payload
