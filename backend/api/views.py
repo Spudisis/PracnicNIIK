@@ -4,8 +4,8 @@ from django.http import JsonResponse
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
 from django.views.decorators.csrf import csrf_exempt
-from .models import Project,Employee,ProjectCards
-from .serializers import ProjectSerializer,EmployeeSerializer,CardSerializer
+from .models import Project,Employee,ProjectCards,Call
+from .serializers import ProjectSerializer,EmployeeSerializer,CardSerializer,CallSerializer
 from django.contrib.auth import get_user_model
 User=get_user_model()
 from accounts.serializers import UserSerializer
@@ -113,3 +113,33 @@ def apiCard(request):
             seralizer.save()
             return JsonResponse("Success",safe=False)
         return JsonResponse("Error",safe= False)
+
+@csrf_exempt
+def apiCall(request):
+    if request.method == 'GET':
+        calls = Call.objects.all()
+        seralizer = CallSerializer(calls, many=True)
+        return JsonResponse(seralizer.data,safe=False)
+
+    elif request.method == 'POST':
+        call_data = JSONParser().parse(request)
+        seralizer = CallSerializer(data=call_data)
+        if seralizer.is_valid(): 
+            seralizer.save()
+            return JsonResponse("Success",safe=False)
+        return JsonResponse("Error",safe= False)
+
+    elif request.method == 'PUT':
+        call_data = JSONParser().parse(request)
+        call = Call.objects.get(id=call_data['id'])
+        seralizer =CallSerializer(call,data=call_data)
+        if seralizer.is_valid():
+            seralizer.save()
+            return JsonResponse("Success",safe=False)
+        return JsonResponse("Error",safe= False)
+
+    elif request.method == 'DELETE':
+        call_data = JSONParser().parse(request)
+        call = Call.objects.get(id=call_data['id'])
+        call.delete()
+        return JsonResponse("Success",safe=False)

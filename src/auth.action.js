@@ -85,7 +85,6 @@ export const login =(email, password)=> async dispatch => {
     const body=JSON.stringify({email,password});
     try{
     const res= await axios.post(`http://127.0.0.1:8000/auth/jwt/create/`,body,config)
-    alert('Успешный вход')
     dispatch({
         type: LOGIN_SUCCESS,
         payload : res.data
@@ -114,7 +113,7 @@ export const signup =(name,email, phone,password,re_password)=> async dispatch =
         payload : res.data
     })
     }catch (err){
-        alert('ОШИБКА БЛЯЯЯЯЯЯТЬ')
+        alert('Введеные данные неккоректны')
         dispatch({
             type: SIGNUP_FAIL
         })
@@ -135,7 +134,7 @@ export const verify =(uid,token) => async dispatch =>{
         type: ACTIVATION_SUCCESS,
     })
     }catch (err){
-        alert('ОШИБКА БЛЯЯЯЯЯЯТЬ')
+        alert('Аккаунт уже был активирован')
         dispatch({
             type: ACTIVATION_FAIL
         })

@@ -6,4 +6,5 @@ urlpatterns =[
     path('employee/', views.apiEmployee, name="employee"),
     path('client/', views.apiUser, name="client"),
     path('cards/', views.apiCard, name="cards"),
+    path('call/', views.apiCall, name="call"),
 ]
