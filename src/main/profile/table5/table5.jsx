@@ -123,25 +123,25 @@ function Table5() {
   const handleOnSubmitAdd = (e) => {
     e.preventDefault();
     onAdd(
-      e.target.idAdd.value,
       e.target.numberAdd.value,
+      e.target.nameAdd.value,
       e.target.stateAdd.value,
       e.target.projectAdd.value
     );
-    e.target.idAdd.value = "";
-
     e.target.numberAdd.value = "";
+    e.target.nameAdd.value = "";
     e.target.stateAdd.value = "";
     e.target.projectAdd.value = "";
   };
   const onPut = async (id, number, name, state, project) => {
-    await fetch(`http://127.0.0.1:8000/employee/`, {
+    console.log(id, name, state, project,number)
+    await fetch(`http://127.0.0.1:8000/call/`, {
       method: "PUT",
       body: JSON.stringify({
         id: id,
         number: number,
         name: name,
-        state: state,
+        state: "true",
         project: project,
       }),
       headers: {
@@ -279,7 +279,7 @@ function Table5() {
               placeholder="Имя"
             />
             <input
-              type="text"
+              type="checkBox"
               defaultValue={row["state"]}
               name="statePut"
               placeholder="Состояние"

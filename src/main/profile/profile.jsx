@@ -12,9 +12,12 @@ import { connect } from "react-redux";
 import OrderAccess from "./orders/profileAccess/orderAccess";
 import Table5 from "./table5/table5";
 
-const Profile = () => {
-  const a = localStorage.getItem("is_staff");
-  if (localStorage.getItem("access") == null) {
+const Profile = ({is_staff,isAuthenticated}) => {
+
+  const a=is_staff
+
+
+  if (isAuthenticated == false) {
     return <Navigate to="/" />;
   }
 
@@ -33,7 +36,7 @@ const Profile = () => {
         >
           Проекты
         </NavLink>
-        {a ? (
+        {(a)? (
           <div className={s.Navlist}>
             <NavLink
               to="table1"
@@ -83,5 +86,8 @@ const Profile = () => {
     </div>
   );
 };
-
-export default connect(null, { checkAthenticated, load_user })(Profile);
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+  is_staff: state.auth.is_staff
+});
+export default connect(mapStateToProps, { checkAthenticated, load_user })(Profile);

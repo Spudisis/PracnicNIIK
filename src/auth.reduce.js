@@ -48,10 +48,11 @@ import{
                 localStorage.setItem('phone',payload.phone);
                 localStorage.setItem('email',payload.email)
                 localStorage.setItem('id',payload.id)
-                localStorage.setItem('is_staff',payload.is_staff)
+                sessionStorage.setItem('is_staff',payload.is_staff)
                 return{
                     ...state,
-                    user:payload
+                    user:payload,
+                    is_staff:payload.is_staff
                 }
             case AUTHENTICATED_FAIL:
                 return{
