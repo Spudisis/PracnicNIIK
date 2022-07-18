@@ -48,7 +48,6 @@ import{
                 localStorage.setItem('phone',payload.phone);
                 localStorage.setItem('email',payload.email)
                 localStorage.setItem('id',payload.id)
-                sessionStorage.setItem('is_staff',payload.is_staff)
                 return{
                     ...state,
                     user:payload,
